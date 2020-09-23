@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  get 'home/index'
+    
+    # Allow signup for users
+    resources :users, only: [:new, :create]
 
-  # Defines the start page of the application
-  root 'home#index'
+    # Allow login/logout for users
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#logout'
+
+    # Allow access to home page
+    get 'home', to: 'home#index'
+    
+    # Defines the start page of the application
+    root 'home#index'
 end

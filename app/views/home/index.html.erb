@@ -1,2 +1,3 @@
-<h1>Username</h1>
+<h1><%= current_user.firstName %> <%= current_user.lastName %></h1>
 <%= link_to "View All Users" %><br>
+<%= button_to "Logout", logout_path, method: "delete" %>
