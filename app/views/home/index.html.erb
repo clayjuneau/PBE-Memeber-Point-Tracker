@@ -1,6 +1,10 @@
 <h1>Professional Brotherhood of Engineers</h1>
-<%= link_to "View All Users" %><br>
-<h2><%= current_user.firstName %> <%= current_user.lastName %></h2>
+<% unless(current_user.role == "Member")%>
+  <%= link_to "View All Users" %><br>
+<% end %>
+
+
+<h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
 <table summary="User detail view">
     <tr>
       <th>Current Points</th>
