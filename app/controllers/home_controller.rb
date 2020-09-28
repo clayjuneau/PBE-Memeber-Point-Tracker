@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-  def index
-    # Model.All
-  end
+    
+    # Display home page
+    def index
+    end
 end
