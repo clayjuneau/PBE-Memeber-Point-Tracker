@@ -1,18 +1,33 @@
-<h1>Sign Up</h1>
-<%= form_for @user do |f|%>
-    <%= f.label :email%><br>
-    <%= f.text_field :email%><br>
-    <%= f.label :firstName%><br>
-    <%= f.text_field :firstName%><br>
-    <%= f.label :lastName%><br>
-    <%= f.text_field :lastName%><br>
-    <%= f.label :password%><br>
-    <%= f.password_field :password%><br>
-    <%= f.submit %>
-<%end%>
-<%= link_to "Log In", login_path %><br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <nav class="navbar navbar-light bg-light">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
 
-<footer>
-  <p>Get in Contact with the Org!</p>
-  <p><a href="mailto:hege@example.com">hege@example.com</a></p>
-</footer>
+        <h2 id="pbe-title">Professional Brotherhood of Engineers</h2>
+
+    </nav>
+  </head>
+
+  <h1>Sign Up</h1>
+  <%= form_for @user do |f|%>
+      <%= f.label :email%><br>
+      <%= f.text_field :email%><br>
+      <%= f.label :firstName%><br>
+      <%= f.text_field :firstName%><br>
+      <%= f.label :lastName%><br>
+      <%= f.text_field :lastName%><br>
+      <%= f.label :password%><br>
+      <%= f.password_field :password%><br>
+      <%= f.submit %>
+  <%end%>
+  <%= link_to "Log In", login_path %><br>
+
+  <footer>
+    <p>Get in Contact with the Org!</p>
+    <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+  </footer>
+
+</html>

@@ -5,12 +5,10 @@
         <%= link_to home_path do %>
           <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
-        <h1 class="navbar-brand" >Professional Brotherhood of Engineers</h1>
-        
-          <div style="padding-left: 10px;">
-            <%= button_to "Logout", logout_path, method: "delete", :class => "btn" %>
-          </div>
-        
+
+        <h2>Professional Brotherhood of Engineers</h2>
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+
     </nav>
   </head>
 
@@ -39,7 +37,7 @@
       </tr>
     </table>
   <%= link_to "View My Events" %><br>
-  
+
   <footer>
     <p>Get in Contact with the Org!</p>
     <p><a href="mailto:hege@example.com">hege@example.com</a></p>
