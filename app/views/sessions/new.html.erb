@@ -1,14 +1,29 @@
-<h1>Login</h1>
-    <%= form_tag '/login' do %>
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-    <%= submit_tag "Login" %>
-<%end%>
-<%= link_to "Sign Up", new_user_path %><br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <nav class="navbar navbar-light bg-light">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
 
-<footer>
-  <p>Get in Contact with the Org!</p>
-  <p><a href="mailto:hege@example.com">hege@example.com</a></p>
-</footer>
+        <h2 id="pbe-title">Professional Brotherhood of Engineers</h2>
+
+    </nav>
+  </head>
+
+  <h1>Login</h1>
+      <%= form_tag '/login' do %>
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+      <%= submit_tag "Login" %>
+  <%end%>
+  <%= link_to "Sign Up", new_user_path %><br>
+
+  <footer>
+    <p>Get in Contact with the Org!</p>
+    <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+  </footer>
+
+</html>
