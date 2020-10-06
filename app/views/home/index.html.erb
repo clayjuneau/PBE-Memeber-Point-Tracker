@@ -1,5 +1,7 @@
 <h1>Professional Brotherhood of Engineers</h1>
-<%= link_to("View All Users", memberlist_path) %><br>
+<% if is_admin? %>
+    <%= link_to("View All Users", memberlist_path) %><br>
+<% end %>
 <h2><%= current_user.firstName %> <%= current_user.lastName %></h2>
 <table summary="User detail view">
     <tr>

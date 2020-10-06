@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
     
     # Makes the login actions accessible without being logged in
-    skip_before_action :authorize_user, only: [:new, :create]
+    skip_before_action :authorize_login, only: [:new, :create]
 
     # Display login page
     def new
