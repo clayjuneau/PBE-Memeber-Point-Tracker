@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
-    include UserRole
+    module UserRole
+        MEMBER = "member"
+        ADMIN = "admin"
+    end
 
     # Check that the user is authorized before any action is performed
     before_action :authorize_login
@@ -27,7 +30,7 @@ class ApplicationController < ActionController::Base
 
     # Checks that the user is an admin
     def is_admin?
-        current_user.role == ADMIN
+        current_user.role == UserRole::ADMIN
     end
 
     # Ensure the user is an admin, if not redirect them to the home page
