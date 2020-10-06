@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     
     # Makes the signup actions accessible without being logged in
-    skip_before_action :authorize_user, only: [:new, :create]
+    skip_before_action :authorize_login, only: [:new, :create]
 
     # Display the signup page
     def new
