@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     # Allow access to home page
     get 'home', to: 'home#index'
 
-    get 'memberlist/index'
+    get 'memberlist', to: 'memberlist#index'
     
     # Defines the start page of the application
     root 'home#index'
