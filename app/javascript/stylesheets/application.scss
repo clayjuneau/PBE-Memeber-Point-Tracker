@@ -1,10 +1,42 @@
 @import "~bootstrap/scss/bootstrap";
 @import '@fortawesome/fontawesome-free';
 
+h1 {
+    text-align: center;
+    padding-top: 50px;
+}
+
+body {
+    text-align: center;
+}
+
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+footer {
+    background:#6cf;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+  }
+
 #home-icon {
     color: #000000;
 }
 
 #pbe-title {
-    padding-right: 686px;
+    padding-right: 689px;
+}
+
+#footer-text {
+    padding-top: 12px;
 }

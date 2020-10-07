@@ -2,41 +2,47 @@
 <html>
   <head>
     <nav class="navbar navbar-light bg-light">
+      <div class = "navbar-header">
         <%= link_to home_path do %>
           <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
+      </div>
 
-        <h2>Professional Brotherhood of Engineers</h2>
+      <h2>Professional Brotherhood of Engineers</h2>
+
+      <div class = "navbar-nav navbar-right">
         <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
-
+      </div>
     </nav>
   </head>
 
-  <% if is_admin? %>
-    <%= link_to("View All Users", memberlist_path) %><br>
-  <% end %>
+  <body>
+    <% if is_admin? %>
+      <%= link_to("View All Users", memberlist_path) %><br>
+    <% end %>
 
 
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
-  <table summary="User detail view">
-      <tr>
-        <th>Current Points</th>
-        <td><%= current_user.points %></td>
-      </tr>
-      <tr>
-        <th>Percent Attendance</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Membership Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Officer Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
-    </table>
-  <%= link_to "View My Events" %><br>
+    <h1><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h1>
+    <table summary="User detail view">
+        <tr>
+          <th>Current Points</th>
+          <td><%= current_user.points %></td>
+        </tr>
+        <tr>
+          <th>Percent Attendance</th>
+          <td>To be calculated later</td>
+        </tr>
+        <tr>
+          <th>Membership Eligibility</th>
+          <td>To be calculated later</td>
+        </tr>
+        <tr>
+          <th>Officer Eligibility</th>
+          <td>To be calculated later</td>
+        </tr>
+      </table>
+    <%= link_to "View My Events" %><br>
+  </body>
 
   <footer>
     <p>Get in Contact with the Org!</p>
