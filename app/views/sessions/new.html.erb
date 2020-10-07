@@ -8,23 +8,29 @@
         <% end %>
       </div>
     
-      <h2>Professional Brotherhood of Engineers</h2>
+      <h1 class = "#pbe-title">Professional Brotherhood of Engineers</h1>
     
       <div class = "navbar-nav navbar-right">
-        <%= link_to "Sign Up", new_user_path, :class => "btn btn-lg" %>
+        <%= button_to "Sign Up", new_user_path, method: "get", :class => "btn btn-lg" %>
       </div>
     </nav>
   </head>
 
   <body>
     
-    <h1>Login</h1>
+    <h2 class = "bottom-space">Point Tracker Login</h2>
 
     <%= form_tag '/login' do %>
-      <%= label_tag :email %>
-      <%= text_field_tag :email %>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
+      <table class="login-form-spacing">
+        <tr>
+          <th>Email:</th>
+          <td><%= text_field_tag :email, nil, placeholder: 'Email'%> </td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td><%= password_field_tag :password, nil, placeholder: 'Password' %></td>
+        </tr>
+      </table>
       <%= submit_tag "Login" %>
     <%end%>
 

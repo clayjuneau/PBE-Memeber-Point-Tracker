@@ -8,7 +8,7 @@
         <% end %>
       </div>
 
-      <h2>Professional Brotherhood of Engineers</h2>
+      <h1>Professional Brotherhood of Engineers</h1>
 
       <div class = "navbar-nav navbar-right">
         <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
@@ -17,12 +17,9 @@
   </head>
 
   <body>
-    <% if is_admin? %>
-      <%= link_to("View All Users", memberlist_path) %><br>
-    <% end %>
 
+    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
 
-    <h1><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h1>
     <table summary="User detail view">
         <tr>
           <th>Current Points</th>
@@ -40,8 +37,14 @@
           <th>Officer Eligibility</th>
           <td>To be calculated later</td>
         </tr>
-      </table>
-    <%= link_to "View My Events" %><br>
+    </table>
+
+    <div id="links">
+      <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
+      <% if is_admin? %>
+        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
+      <% end %>
+    </div>
   </body>
 
   <footer>
