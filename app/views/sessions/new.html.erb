@@ -2,28 +2,38 @@
 <html>
   <head>
     <nav class="navbar navbar-light bg-light">
+      <div class = "navbar-header">
         <%= link_to home_path do %>
           <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
-
-        <h2 id="pbe-title">Professional Brotherhood of Engineers</h2>
-
+      </div>
+    
+      <h1 class = "#pbe-title">Professional Brotherhood of Engineers</h1>
+    
+      <div class = "navbar-nav navbar-right">
+        <%= button_to "Sign Up", new_user_path, method: "get", :class => "btn btn-lg" %>
+      </div>
     </nav>
   </head>
 
-  <h1>Login</h1>
-      <%= form_tag '/login' do %>
-      <%= label_tag :email %>
-      <%= text_field_tag :email %>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
-      <%= submit_tag "Login" %>
-  <%end%>
-  <%= link_to "Sign Up", new_user_path %><br>
+  <body>
+    
+    <h2 class = "bottom-space">Point Tracker Login</h2>
 
-  <footer>
-    <p>Get in Contact with the Org!</p>
-    <p><a href="mailto:hege@example.com">hege@example.com</a></p>
-  </footer>
+    <%= form_tag '/login' do %>
+      <table class="login-form-spacing">
+        <tr>
+          <th>Email:</th>
+          <td><%= text_field_tag :email, nil, placeholder: 'Email'%> </td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td><%= password_field_tag :password, nil, placeholder: 'Password' %></td>
+        </tr>
+      </table>
+      <%= submit_tag "Login" %>
+    <%end%>
+
+  </body>
 
 </html>

@@ -1,19 +1,38 @@
-<h1>Professional Brotherhood of Engineers</h1>
-<%= link_to("Home", home_path) %><br>
-<br>
-<h2>User List</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <nav class="navbar navbar-light bg-light">
+      <div class = "navbar-header">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
+      </div>
 
-<table summary="User detail view">
-    <tr class="header">
-      <th>Name</th>
-      <th>Points</th>
-      <th>Role</th>
-    </tr>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%=user.firstName %><%= user.lastName%></td>
-      <td><%= user.points %></td>
-      <td><%= user.role %></td>
-    </tr>
-    <% end %>
-</table>
+      <h1>Professional Brotherhood of Engineers</h1>
+
+      <div class = "navbar-nav navbar-right">
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+      </div>
+    </nav>
+  </head>
+
+  <body></body>
+    <h2>User List</h2>
+
+    <table summary="User detail view">
+        <tr class="header">
+          <th>Name</th>
+          <th>Points</th>
+          <th>Role</th>
+        </tr>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%=user.firstName %><%= user.lastName%></td>
+          <td><%= user.points %></td>
+          <td><%= user.role %></td>
+        </tr>
+        <% end %>
+    </table>
+  </body>
+  
+</html>
