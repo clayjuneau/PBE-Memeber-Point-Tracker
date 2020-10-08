@@ -2,22 +2,14 @@
 <html>
   <head>
     <nav class="navbar navbar-light bg-light">
-      <div class = "navbar-header">
-        <%= link_to home_path do %>
-          <%= fa_icon "home", size: '3x', id: "home-icon" %>
-        <% end %>
-      </div>
-    
-      <h1 class = "#pbe-title">Professional Brotherhood of Engineers</h1>
-    
-      <div class = "navbar-nav navbar-right">
+      <ul class = "navbar-nav navbar-right">
         <%= button_to "Sign Up", new_user_path, method: "get", :class => "btn btn-lg" %>
-      </div>
+      </ul>
     </nav>
   </head>
 
   <body>
-    
+    <%= image_tag 'logo2.jpg' %>
     <h2 class = "bottom-space">Point Tracker Login</h2>
 
     <%= form_tag '/login' do %>
