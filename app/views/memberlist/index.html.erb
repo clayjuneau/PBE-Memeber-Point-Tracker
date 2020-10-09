@@ -1,15 +1,19 @@
 <head>
-  <nav class="navbar navbar-light bg-light">
-      <%= link_to home_path do %>
-        <%= fa_icon "home", size: '3x', id: "home-icon" %>
-      <% end %>
+    <nav class="navbar navbar-light bg-light">
+      <div class = "navbar-header">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
+      </div>
 
-      <h2>Professional Brotherhood of Engineers</h2>
-      <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+      <h1>Professional Brotherhood of Engineers</h1>
 
-  </nav>
-</head>
-<% @users.each do |user| %>
+      <div class = "navbar-nav navbar-right">
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+      </div>
+    </nav>
+  </head>
+<% @users.each do |user| %>#only for not I have points to work with
   <tr>
     <td><%user.points = user.id+2 %></td>
   </tr>
