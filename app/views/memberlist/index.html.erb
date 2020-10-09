@@ -1,8 +1,41 @@
-<h1>Professional Brotherhood of Engineers</h1>
-<%= link_to("Home", home_path) %><br>
-<br>
-<h2>User List</h2>
+<head>
+  <nav class="navbar navbar-light bg-light">
+      <%= link_to home_path do %>
+        <%= fa_icon "home", size: '3x', id: "home-icon" %>
+      <% end %>
 
+      <h2>Professional Brotherhood of Engineers</h2>
+      <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+
+  </nav>
+</head>
+<% @users.each do |user| %>
+  <tr>
+    <td><%user.points = user.id+2 %></td>
+  </tr>
+<% end %>
+<h2>User List</h2>
+<%if @threshold =="above"%>
+  <%= form_with do |form|%>
+    <%= form.label(:q, "Search For Users With Points") %>
+    <%= form.radio_button(:threshold, "above", :checked =>true) %>
+    <%= form.label(:threshold_above, "Above") %>
+    <%= form.radio_button(:threshold, "below") %>
+    <%= form.label(:threshold_below, "Below") %>
+    <%= form.number_field(:q, value:@value) %>
+    <%= form.submit("Search", :onclick=> "update") %>
+  <% end %>
+<%else%>
+  <%= form_with do |form|%>
+    <%= form.label(:q, "Search For Users With Points") %>
+    <%= form.radio_button(:threshold, "above") %>
+    <%= form.label(:threshold_above, "Above") %>
+    <%= form.radio_button(:threshold, "below", :checked =>true) %>
+    <%= form.label(:threshold_below, "Below") %>
+    <%= form.number_field(:q, value:@value) %>
+    <%= form.submit("Search", :onclick=> "update") %>
+  <% end %>
+<%end%>
 <table summary="User detail view">
     <tr class="header">
       <th>Name</th>
@@ -10,10 +43,22 @@
       <th>Role</th>
     </tr>
     <% @users.each do |user| %>
-    <tr>
-      <td><%=user.firstName %><%= user.lastName%></td>
-      <td><%= user.points %></td>
-      <td><%= user.role %></td>
-    </tr>
+      <%if @threshold =="above" && user.points>@value%>
+        <tr>
+          <td><%=user.firstName + " "%><%= user.lastName%></td>
+          <td><%= user.points %></td>
+          <td><%= user.role %></td>
+        </tr>
+      <%elsif @threshold=="below" && user.points<@value%>
+          <tr>
+            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
+      <% end %>
     <% end %>
 </table>
+<footer>
+  <p>Get in Contact with the Org!</p>
+  <p><a href="mailto:tylerg3@tamu.edu">tylerg3@tamu.edu</a></p>
+</footer>

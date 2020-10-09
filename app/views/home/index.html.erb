@@ -12,7 +12,7 @@
     </nav>
   </head>
 
-  <% if is_admin? %>
+  <% if true %>
     <%= link_to("View All Users", memberlist_path) %><br>
   <% end %>
 
@@ -21,7 +21,11 @@
   <table summary="User detail view">
       <tr>
         <th>Current Points</th>
-        <td><%= current_user.points %></td>
+        <td><% if current_user.points?%>
+              <%=current_user.points %>
+          <%else%>
+            <%=0%>
+          <%end%></td>
       </tr>
       <tr>
         <th>Percent Attendance</th>
@@ -40,6 +44,6 @@
 
   <footer>
     <p>Get in Contact with the Org!</p>
-    <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+    <p><a href="mailto:tylerg3@tamu.edu">tylerg3@tamu.edu</a></p>
   </footer>
 </html>
