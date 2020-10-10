@@ -7,7 +7,7 @@ environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
 environment.plugins.append("Provide", new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jQuery',
+    jQuery: 'jquery',
     Popper: ['popper.js', 'default']
 }))
 module.exports = environment

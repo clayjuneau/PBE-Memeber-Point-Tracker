@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_213145) do
     t.string "firstName"
     t.string "lastName"
     t.string "email"
-    t.string "role", default: "Member"
+    t.string "role"
     t.integer "points"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false

@@ -46,6 +46,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  # Adds support for SimpleCov code coverage report
+  gem 'simplecov', :require => false, :group => :test
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
