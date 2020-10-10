@@ -17,8 +17,23 @@
   </head>
 
   <body>
-
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
+ <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
+  <p id="standing"></p>
+  <script>
+	  //test for standing checks replace the variables with the actual values at a later date
+	  standingCheck();
+	  function standingCheck(){
+		var testEventsAttended = 10; 
+		var testEventsTotal = 15; 
+		var i = testEventsAttended / testEventsTotal;
+		if(i >= 0.5){
+			document.getElementById("standing").innerHTML = "You are currently in good standing"; 
+		}
+		else{
+			document.getElementById("standing").innerHTML = "You are not currently in good standing";
+		}
+	  }
+	  </script>
   <table summary="User detail view">
       <tr>
         <th>Current Points</th>
