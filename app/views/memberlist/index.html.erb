@@ -12,7 +12,7 @@
         <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
       </div>
     </nav>
-  </head>
+</head>
 <% @users.each do |user| %>#only for not I have points to work with
   <tr>
     <td><%user.points = user.id+2 %></td>
@@ -62,7 +62,3 @@
       <% end %>
     <% end %>
 </table>
-<footer>
-  <p>Get in Contact with the Org!</p>
-  <p><a href="mailto:tylerg3@tamu.edu">tylerg3@tamu.edu</a></p>
-</footer>
