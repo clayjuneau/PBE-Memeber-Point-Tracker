@@ -2,28 +2,42 @@
 <html>
   <head>
     <nav class="navbar navbar-light bg-light">
+      <div class = "navbar-header">
         <%= link_to home_path do %>
           <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
+      </div>
 
-        <h2 id="pbe-title">Professional Brotherhood of Engineers</h2>
+      <h1>Professional Brotherhood of Engineers</h1>
 
+      <div class = "navbar-nav navbar-right">
+        <%= button_to "Login", login_path, method: "get", :class => "btn btn-lg" %>
+      </div>
     </nav>
   </head>
 
-  <h1>Sign Up</h1>
-  <%= form_for @user do |f|%>
-      <%= f.label :email%><br>
-      <%= f.text_field :email%><br>
-      <%= f.label :firstName%><br>
-      <%= f.text_field :firstName%><br>
-      <%= f.label :lastName%><br>
-      <%= f.text_field :lastName%><br>
-      <%= f.label :password%><br>
-      <%= f.password_field :password%><br>
-      <%= f.submit %>
+  <h2 class = "bottom-space">Sign Up</h2>
+  
+  <%= simple_form_for @user do |f|%>
+    <table class="login-form-spacing">
+        <tr>
+          <th>Email:</th>
+          <td><%= f.text_field :email, placeholder: 'Email'%></td>
+        </tr>
+        <tr>
+          <th>First Name:</th>
+          <td><%= f.text_field :firstName, placeholder: 'First Name'%></td>
+        </tr>
+        <tr>
+          <th>Last Name:</th>
+          <td><%= f.text_field :lastName, placeholder: 'Last Name'%></td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td><%= f.password_field :password, placeholder: 'Password'%></td>
+        </tr>
+    </table>
+    <%= f.submit %>
   <%end%>
-  <%= link_to "Log In", login_path %><br>
-
 
 </html>
