@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    
+
     <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
 
   <table summary="User detail view">
@@ -45,7 +45,7 @@
 
     <div id="links">
       <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
-      <% if is_admin? %>
+      <% if true %>
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>

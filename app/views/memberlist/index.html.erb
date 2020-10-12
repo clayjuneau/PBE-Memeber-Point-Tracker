@@ -27,6 +27,8 @@
     <%= form.radio_button(:threshold, "below") %>
     <%= form.label(:threshold_below, "Below") %>
     <%= form.number_field(:q, value:@value) %>
+    <%= form.label(:q, "And The Name") %>
+    <%= form.text_field(:n, value:@searchName) %>
     <%= form.submit("Search", :onclick=> "update") %>
   <% end %>
 <%else%>
@@ -37,6 +39,8 @@
     <%= form.radio_button(:threshold, "below", :checked =>true) %>
     <%= form.label(:threshold_below, "Below") %>
     <%= form.number_field(:q, value:@value) %>
+    <%= form.text_field(:n, value:@searchName) %>
+    <%= form.submit("Search", :onclick=> "update") %>
     <%= form.submit("Search", :onclick=> "update") %>
   <% end %>
 <%end%>
@@ -47,18 +51,36 @@
       <th>Role</th>
     </tr>
     <% @users.each do |user| %>
-      <%if @threshold =="above" && user.points>@value%>
-        <tr>
-          <td><%=user.firstName + " "%><%= user.lastName%></td>
-          <td><%= user.points %></td>
-          <td><%= user.role %></td>
-        </tr>
-      <%elsif @threshold=="below" && user.points<@value%>
+      <%if @searchList.length()==0%>
+        <%if @threshold =="above" && user.points>@value%>
           <tr>
             <td><%=user.firstName + " "%><%= user.lastName%></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
+          <%elsif @threshold=="below" && user.points<@value%>
+          <tr>
+            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <% end %>
+      <%else%>
+        <%for word in @searchList%>
+          <%if (word ==user.firstName||word==user.lastName)&&@threshold =="above" && user.points>@value%>
+            <tr>
+              <td><%=user.firstName + " "%><%= user.lastName%></td>
+              <td><%= user.points %></td>
+              <td><%= user.role %></td>
+            </tr>
+          <%elsif (word ==user.firstName||word==user.lastName)&& @threshold=="below" && user.points<@value%>
+            <tr>
+              <td><%=user.firstName + " "%><%= user.lastName%></td>
+              <td><%= user.points %></td>
+              <td><%= user.role %></td>
+            </tr>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
 </table>
