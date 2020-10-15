@@ -19,30 +19,53 @@
   </tr>
 <% end %>
 <h2>User List</h2>
-<%if @threshold =="above"%>
+<%if @filter =="namefilter"%>
+  <%= form_with do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter", :checked =>true) %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.submit("Search", :onclick=> "updateFilter") %>
+  <% end %>
+<%else%>
+  <%= form_with do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter", :checked =>true) %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.submit("Search", :onclick=> "updateFilter") %>
+  <% end %>
+<% end %>
+<%if @filter == "namefilter"%>
   <%= form_with do |form|%>
-    <%= form.label(:q, "Search For Users With Points") %>
-    <%= form.radio_button(:threshold, "above", :checked =>true) %>
-    <%= form.label(:threshold_above, "Above") %>
-    <%= form.radio_button(:threshold, "below") %>
-    <%= form.label(:threshold_below, "Below") %>
-    <%= form.number_field(:q, value:@value) %>
-    <%= form.label(:q, "And The Name") %>
+    <%= form.label(:q, "Search For Users With the Name") %>
     <%= form.text_field(:n, value:@searchName) %>
     <%= form.submit("Search", :onclick=> "update") %>
   <% end %>
 <%else%>
-  <%= form_with do |form|%>
-    <%= form.label(:q, "Search For Users With Points") %>
-    <%= form.radio_button(:threshold, "above") %>
-    <%= form.label(:threshold_above, "Above") %>
-    <%= form.radio_button(:threshold, "below", :checked =>true) %>
-    <%= form.label(:threshold_below, "Below") %>
-    <%= form.number_field(:q, value:@value) %>
-    <%= form.text_field(:n, value:@searchName) %>
-    <%= form.submit("Search", :onclick=> "update") %>
-    <%= form.submit("Search", :onclick=> "update") %>
-  <% end %>
+  <%if @threshold =="below"%>
+    <%= form_with do |form|%>
+      <%= form.label(:q, "Search For Users With Points") %>
+      <%= form.radio_button(:threshold, "above") %>
+      <%= form.label(:threshold_above, "Above") %>
+      <%= form.radio_button(:threshold, "below", :checked =>true) %>
+      <%= form.label(:threshold_below, "Below") %>
+      <%= form.number_field(:q, value:@value) %>
+      <%= form.submit("Search", :onclick=> "update") %>
+    <% end %>
+  <%else%>
+    <%= form_with do |form|%>
+      <%= form.label(:q, "Search For Users With Points") %>
+      <%= form.radio_button(:threshold, "above", :checked =>true) %>
+      <%= form.label(:threshold_above, "Above") %>
+      <%= form.radio_button(:threshold, "below") %>
+      <%= form.label(:threshold_below, "Below") %>
+      <%= form.number_field(:q, value:@value) %>
+      <%= form.submit("Search", :onclick=> "update") %>
+    <% end %>
+  <%end%>
 <%end%>
 <table summary="User detail view">
     <tr class="header">
@@ -51,35 +74,49 @@
       <th>Role</th>
     </tr>
     <% @users.each do |user| %>
-      <%if @searchList.length()==0%>
+      <%if @filter=="namefilter"%>
+        <%if @searchList.length()==0%>
+          <tr>
+            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <%else%>
+          <%for word in @searchList%>
+            <%if (word ==user.firstName||word==user.lastName)%>
+              <tr>
+                <td><%=user.firstName + " "%><%= user.lastName%></td>
+                <td><%= user.points %></td>
+                <td><%= user.role %></td>
+              </tr>
+            <%elsif (word ==user.firstName||word==user.lastName)%>
+              <tr>
+                <td><%=user.firstName + " "%><%= user.lastName%></td>
+                <td><%= user.points %></td>
+                <td><%= user.role %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <%else%>
         <%if @threshold =="above" && user.points>@value%>
           <tr>
             <td><%=user.firstName + " "%><%= user.lastName%></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
-          <%elsif @threshold=="below" && user.points<@value%>
+        <%elsif @threshold=="below" && user.points<@value%>
           <tr>
             <td><%=user.firstName + " "%><%= user.lastName%></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
-        <% end %>
-      <%else%>
-        <%for word in @searchList%>
-          <%if (word ==user.firstName||word==user.lastName)&&@threshold =="above" && user.points>@value%>
-            <tr>
-              <td><%=user.firstName + " "%><%= user.lastName%></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%elsif (word ==user.firstName||word==user.lastName)&& @threshold=="below" && user.points<@value%>
-            <tr>
-              <td><%=user.firstName + " "%><%= user.lastName%></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <% end %>
+		<%elsif @threshold.nil?||@value.nil?%>
+		  <tr>
+            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
         <% end %>
       <% end %>
     <% end %>
