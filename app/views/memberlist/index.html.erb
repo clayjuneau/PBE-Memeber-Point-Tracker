@@ -77,7 +77,7 @@
       <%if @filter=="namefilter"%>
         <%if @searchList.length()==0%>
           <tr>
-            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
@@ -85,13 +85,13 @@
           <%for word in @searchList%>
             <%if (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=user.firstName + " "%><%= user.lastName%></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
             <%elsif (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=user.firstName + " "%><%= user.lastName%></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
@@ -101,19 +101,19 @@
       <%else%>
         <%if @threshold =="above" && user.points>@value%>
           <tr>
-            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <%elsif @threshold=="below" && user.points<@value%>
           <tr>
-            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
 		<%elsif @threshold.nil?||@value.nil?%>
 		  <tr>
-            <td><%=user.firstName + " "%><%= user.lastName%></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
