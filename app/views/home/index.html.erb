@@ -101,7 +101,7 @@
 
     <div id="links">
       <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
-      <% if true%>
+      <% if is_admin?%>
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>

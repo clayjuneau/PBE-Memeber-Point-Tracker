@@ -3,6 +3,7 @@ class MemberlistController < ApplicationController
     @filter = session[:f]
     @threshold = session[:t]
     @value = session[:v]
+    @role = session[:r]
     @searchName = session[:n]
     if(@searchName!=nil)
       @searchList = @searchName.split(" ")
@@ -16,6 +17,7 @@ class MemberlistController < ApplicationController
     @threshold = params[:threshold]
     @value = params[:q].to_i
     @searchName = params[:n]
+    @role = params[:userrole]
     @temp = params[:filtertype]
     if(@temp ==nil)
       @temp = session[:f]
@@ -26,6 +28,7 @@ class MemberlistController < ApplicationController
     end
     session[:t] = @threshold
     session[:v] = @value
+    session[:r] = @role
     session[:n] = @searchName
     if(@searchName!=nil)
       @searchList = @searchName.split(" ")
@@ -36,8 +39,9 @@ class MemberlistController < ApplicationController
     redirect_to memberlist_path
   end
   def updateFilter
-	@threshold = session[:t]
+	  @threshold = session[:t]
     @value = session[:v]
+    @role = session[:r]
     @searchName = session[:n]
     if(@searchName!=nil)
       @searchList = @searchName.split(" ")
