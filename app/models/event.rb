@@ -1,0 +1,2 @@
+class Event < ParticipationBase
+end
