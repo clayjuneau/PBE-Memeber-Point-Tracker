@@ -17,13 +17,18 @@
   </head>
 
   <body>
-    
-    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
 
+    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
+    <p id="standing"></p>
+  
     <table summary="User detail view">
         <tr>
           <th>Current Points</th>
-          <td><%= current_user.points %></td>
+          <td><% if current_user.points?%>
+                <%=current_user.points %>
+            <%else%>
+              <%=0%>
+            <%end%></td>
         </tr>
         <tr>
           <th>Percent Attendance</th>
@@ -55,6 +60,6 @@
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>
+    
   </body>
-
 </html>
