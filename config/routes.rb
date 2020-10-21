@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     # Allow access to home page
     get 'home', to: 'home#index'
 
+    # Allow admin access to all users
     get 'memberlist', to: 'memberlist#index'
     post 'memberlist', to: 'memberlist#update'
+    get 'edit', to: 'users#edit'
 
     # Defines the start page of the application
     root 'home#index'
