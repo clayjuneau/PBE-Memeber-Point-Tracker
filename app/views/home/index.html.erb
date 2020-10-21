@@ -1,85 +1,104 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <nav class="navbar navbar-light bg-light">
-      <div class = "navbar-header">
-        <%= link_to home_path do %>
-          <%= fa_icon "home", size: '3x', id: "home-icon" %>
-        <% end %>
-      </div>
-      <h1>Professional Brotherhood of Engineers</h1>
+        <div class="navbar-header">
+            <%= link_to home_path do %>
+            <%= fa_icon "home", size: '3x', id: "home-icon" %>
+            <% end %>
+        </div>
 
-      <div class = "navbar-nav navbar-right">
-        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
-      </div>
+        <h1>Professional Brotherhood of Engineers</h1>
+
+        <div class="navbar-nav navbar-right">
+            <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+        </div>
     </nav>
-  </head>
+</head>
 
-  <body>
- <%if @user.nil?%>
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
+<body>
+    <%if @user.nil?%>
+    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
         <%=current_user.role %>
-    <%else%>
-      <%="member"%>
-    <%end%></h2>
+        <%else%>
+        <%="member"%>
+        <%end%></h2>
     <p id="standing"></p>
 
     <table summary="User detail view">
         <tr>
-          <th>Current Points</th>
-          <td><% if current_user.points?%>
+            <th>Current Points</th>
+            <td><% if current_user.points?%>
                 <%=current_user.points %>
-            <%else%>
-              <%=0%>
-            <%end%></td>
+                <%else%>
+                <%=0%>
+                <%end%></td>
         </tr>
         <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
+            <th>Percent Attendance</th>
+            <td id="percentAttendance"></td>
         </tr>
         <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
+            <th>Membership Eligibility</th>
+            <td id="membershipEligibility"></td>
         </tr>
         <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
+            <th>Officer Eligibility</th>
+            <td id="officerEligibility"></td>
         </tr>
     </table>
-  <%else%>
+    <%else%>
     <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
     <p id="standing"></p>
 
     <table summary="User detail view">
         <tr>
-          <th>Current Points</th>
-          <td><% if @user.points?%>
+            <th>Current Points</th>
+            <td><% if @user.points?%>
                 <%=@user.points %>
-            <%else%>
-              <%=0%>
-            <%end%></td>
+                <%else%>
+                <%=0%>
+                <%end%></td>
         </tr>
         <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
+            <th>Percent Attendance</th>
+            <td id="percentAttendance"></td>
         </tr>
         <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
+            <th>Membership Eligibility</th>
+            <td id="membershipEligibility"></td>
         </tr>
         <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
+            <th>Officer Eligibility</th>
+            <td id="officerEligibility"></td>
         </tr>
     </table>
-  <%end%>
+    <%end%>
 
     <div id="links">
-      <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
-      <% if is_admin?%>
+        <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
+        <% if is_admin?%>
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
-      <% end %>
+        <% end %>
     </div>
 
-  </body>
+    <h3>Event Participation</h3>
+    <table summary="Event view">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+        <% @events.each do |event| %>
+        <tr>
+            <td><%=event.title%></td>
+            <td><%= event.description %></td>
+            <td><%= event.date %></td>
+        </tr>
+        <% end %>
+    </table>
+
+</body>
+
 </html>
