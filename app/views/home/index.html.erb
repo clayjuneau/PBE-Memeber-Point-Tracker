@@ -20,7 +20,7 @@
  <%if @user.nil?%>
   <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
     <p id="standing"></p>
-  
+
     <table summary="User detail view">
         <tr>
           <th>Current Points</th>
@@ -42,10 +42,11 @@
           <th>Officer Eligibility</th>
           <td id="officerEligibility"></td>
         </tr>
+     </table>
   <%else%>
     <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
     <p id="standing"></p>
-  
+
     <table summary="User detail view">
         <tr>
           <th>Current Points</th>
@@ -76,6 +77,6 @@
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>
-    
+
   </body>
 </html>
