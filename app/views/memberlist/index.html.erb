@@ -129,7 +129,7 @@
       <%if @filter=="namefilter"%>
         <%if @searchList.length()==0%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
@@ -137,13 +137,13 @@
           <%for word in @searchList%>
             <%if (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
             <%elsif (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
@@ -153,7 +153,7 @@
       <%elsif @filter=="rolefilter"%>
         <%if user.role==@role%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
@@ -161,26 +161,26 @@
       <%elsif @filter=="pointfilter"%>
         <%if @threshold =="above" && user.points>@value%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <%elsif @threshold=="below" && user.points<@value%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <%elsif @threshold.nil?||@value.nil?%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <% end %>
       <%else%>
         <tr>
-          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
           <td><%= user.points %></td>
           <td><%= user.role %></td>
         </tr>
