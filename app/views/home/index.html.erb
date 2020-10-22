@@ -17,10 +17,10 @@
   </head>
 
   <body>
-
-    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
+ <%if @user.nil?%>
+  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
     <p id="standing"></p>
-  
+
     <table summary="User detail view">
         <tr>
           <th>Current Points</th>
@@ -42,14 +42,41 @@
           <th>Officer Eligibility</th>
           <td id="officerEligibility"></td>
         </tr>
+     </table>
+  <%else%>
+    <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
+    <p id="standing"></p>
+
+    <table summary="User detail view">
+        <tr>
+          <th>Current Points</th>
+          <td><% if @user.points?%>
+                <%=@user.points %>
+            <%else%>
+              <%=0%>
+            <%end%></td>
+        </tr>
+        <tr>
+          <th>Percent Attendance</th>
+          <td id="percentAttendance"></td>
+        </tr>
+        <tr>
+          <th>Membership Eligibility</th>
+          <td id="membershipEligibility"></td>
+        </tr>
+        <tr>
+          <th>Officer Eligibility</th>
+          <td id="officerEligibility"></td>
+        </tr>
     </table>
+  <%end%>
 
     <div id="links">
       <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
-      <% if is_admin? %>
+      <% if is_admin?%>
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>
-    
+
   </body>
 </html>
