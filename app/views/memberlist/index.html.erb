@@ -20,7 +20,7 @@
 <% end %>
 <h2>User List</h2>
 <%if @filter =="namefilter"%>
-  <%= form_with do |filter|%>
+  <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter") %>
     <%= filter.label(:pointfilterlabel, "number of points") %>
@@ -28,10 +28,10 @@
     <%= filter.label(:namefilterlabel, "name") %>
     <%= filter.radio_button(:filtertype, "rolefilter") %>
     <%= filter.label(:rolefilterlabel, "role") %>
-    <%= filter.submit("Search", :onclick=> "updateFilter") %>
+    <%= filter.submit("Filter", :onclick=> "updateFilter") %>
   <% end %>
 <%elsif @filter =="rolefilter"%>
-  <%= form_with do |filter|%>
+  <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter") %>
     <%= filter.label(:pointfilterlabel, "number of points") %>
@@ -39,10 +39,12 @@
     <%= filter.label(:namefilterlabel, "name") %>
     <%= filter.radio_button(:filtertype, "rolefilter", :checked =>true) %>
     <%= filter.label(:rolefilterlabel, "role") %>
-    <%= filter.submit("Search", :onclick=> "updateFilter") %>
+    <%= filter.radio_button(:filtertype, "nofilter") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :onclick=> "updateFilter") %>
   <% end %>
-<%else%>
-  <%= form_with do |filter|%>
+<%elsif @filter =="pointfilter"%>
+  <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter", :checked =>true) %>
     <%= filter.label(:pointfilterlabel, "number of points") %>
@@ -50,7 +52,22 @@
     <%= filter.label(:namefilterlabel, "name") %>
     <%= filter.radio_button(:filtertype, "rolefilter") %>
     <%= filter.label(:rolefilterlabel, "role") %>
-    <%= filter.submit("Search", :onclick=> "updateFilter") %>
+    <%= filter.radio_button(:filtertype, "nofilter") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :onclick=> "updateFilter") %>
+  <% end %>
+<%else%>
+  <%= form_with(:method => "post") do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.radio_button(:filtertype, "rolefilter") %>
+    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter", :checked =>true) %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :onclick=> "updateFilter") %>
   <% end %>
 <% end %>
 <%if @filter == "namefilter"%>
@@ -79,7 +96,7 @@
       <%= form.submit("Search", :onclick=> "update") %>
     <% end %>
   <%end%>
-<%else%>
+<%elsif @filter == "pointfilter"%>
   <%if @threshold =="below"%>
     <%= form_with do |form|%>
       <%= form.label(:q, "Search For Users With Points") %>
@@ -141,7 +158,7 @@
             <td><%= user.role %></td>
           </tr>
         <%end%>
-      <%else%>
+      <%elsif @filter=="pointfilter"%>
         <%if @threshold =="above" && user.points>@value%>
           <tr>
             <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
@@ -154,13 +171,19 @@
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
-		<%elsif @threshold.nil?||@value.nil?%>
-		  <tr>
+        <%elsif @threshold.nil?||@value.nil?%>
+          <tr>
             <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <% end %>
+      <%else%>
+        <tr>
+          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+          <td><%= user.points %></td>
+          <td><%= user.role %></td>
+        </tr>
       <% end %>
     <% end %>
 </table>
