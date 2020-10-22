@@ -9,6 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("packs/standing.js")
+require("packs/membershipEligibility.js")
+require("packs/officerEligibility.js")
 require("packs/percent_attendance.js")
 
 import "bootstrap"
