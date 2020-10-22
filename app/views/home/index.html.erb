@@ -20,82 +20,53 @@
  <%if @user.nil?%>
   <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
     <p id="standing"></p>
-    <script>
-	     //test for standing checks replace the variables with the actual values at a later date
-	     standingCheck();
-	     function standingCheck(){
-		   var testEventsAttended = 10;
-		   var testEventsTotal = 15;
-		   var i = testEventsAttended / testEventsTotal;
-		   if(i >= 0.5){
-			      document.getElementById("standing").innerHTML = "You are currently in good standing";
-		   }
-		   else{
-			      document.getElementById("standing").innerHTML = "You are not currently in good standing";
-		   }
-	    }
-	   </script>
-     <table summary="User detail view">
-      <tr>
-        <th>Current Points</th>
-        <td><% if current_user.points?%>
-              <%=current_user.points %>
-          <%else%>
-            <%=0%>
-          <%end%></td>
-      </tr>
-      <tr>
-        <th>Percent Attendance</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Membership Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Officer Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
-      </table>
+  
+    <table summary="User detail view">
+        <tr>
+          <th>Current Points</th>
+          <td><% if current_user.points?%>
+                <%=current_user.points %>
+            <%else%>
+              <%=0%>
+            <%end%></td>
+        </tr>
+        <tr>
+          <th>Percent Attendance</th>
+          <td id="percentAttendance"></td>
+        </tr>
+        <tr>
+          <th>Membership Eligibility</th>
+          <td id="membershipEligibility"></td>
+        </tr>
+        <tr>
+          <th>Officer Eligibility</th>
+          <td id="officerEligibility"></td>
+        </tr>
   <%else%>
-  <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
+    <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
     <p id="standing"></p>
-    <script>
-	     //test for standing checks replace the variables with the actual values at a later date
-	     standingCheck();
-	     function standingCheck(){
-		   var testEventsAttended = 10;
-		   var testEventsTotal = 15;
-		   var i = testEventsAttended / testEventsTotal;
-		   if(i >= 0.5){
-			      document.getElementById("standing").innerHTML = "You are currently in good standing";
-		   }
-		   else{
-			      document.getElementById("standing").innerHTML = "You are not currently in good standing";
-		   }
-	    }
-	  </script>
-  <table summary="User detail view">
-      <tr>
-        <th>Current Points</th>
-        <td><% if @user.points?%>
-              <%=@user.points %>
-          <%else%>
-            <%=0%>
-          <%end%></td>
-      </tr>
-      <tr>
-        <th>Percent Attendance</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Membership Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
-      <tr>
-        <th>Officer Eligibility</th>
-        <td>To be calculated later</td>
-      </tr>
+  
+    <table summary="User detail view">
+        <tr>
+          <th>Current Points</th>
+          <td><% if @user.points?%>
+                <%=@user.points %>
+            <%else%>
+              <%=0%>
+            <%end%></td>
+        </tr>
+        <tr>
+          <th>Percent Attendance</th>
+          <td id="percentAttendance"></td>
+        </tr>
+        <tr>
+          <th>Membership Eligibility</th>
+          <td id="membershipEligibility"></td>
+        </tr>
+        <tr>
+          <th>Officer Eligibility</th>
+          <td id="officerEligibility"></td>
+        </tr>
     </table>
   <%end%>
 
@@ -105,5 +76,6 @@
         <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
       <% end %>
     </div>
+    
   </body>
 </html>
