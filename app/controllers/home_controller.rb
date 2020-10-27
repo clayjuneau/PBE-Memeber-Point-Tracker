@@ -2,6 +2,8 @@ class HomeController < ApplicationController
 
     # Display home page
     def index
-      #@user = User.find(params[:id])
+      if (params.has_key?(:id))
+        @user = User.find(params[:id])
+      end
     end
 end
