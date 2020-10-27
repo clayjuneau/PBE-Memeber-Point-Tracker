@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<head>
     <nav class="navbar navbar-light bg-light">
-      <%= link_to home_path do %>
-        <%= fa_icon "home", size: '3x', id: "home-icon" %>
-      <% end %>
+      <div class = "navbar-header">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
+      </div>
 
       <h1>Professional Brotherhood of Engineers</h1>
 
@@ -12,7 +12,7 @@
         <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
       </div>
     </nav>
-  </head>
+</head>
 <% @users.each do |user| %>
   <tr>
     <td><%user.points = user.id+2 %></td>
@@ -203,55 +203,4 @@
         </tr>
       <% end %>
     <% end %>
-
-    <h2>User List</h2>
-
-    <%if @threshold =="above"%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With Points") %>
-        <%= form.radio_button(:threshold, "above", :checked =>true) %>
-        <%= form.label(:threshold_above, "Above") %>
-        <%= form.radio_button(:threshold, "below") %>
-        <%= form.label(:threshold_below, "Below") %>
-        <%= form.number_field(:q, value:@value) %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%else%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With Points") %>
-        <%= form.radio_button(:threshold, "above") %>
-        <%= form.label(:threshold_above, "Above") %>
-        <%= form.radio_button(:threshold, "below", :checked =>true) %>
-        <%= form.label(:threshold_below, "Below") %>
-        <%= form.number_field(:q, value:@value) %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%end%>
-
-    <table summary="User detail view">
-        <tr class="header">
-          <th>Name</th>
-          <th>Points</th>
-          <th>Role</th>
-        </tr>
-        <% @users.each do |user| %>
-          <%if @threshold =="above" && user.points>@value%>
-            <tr>
-              <td><%=user.firstName + " "%><%= user.lastName%></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-              <td><%= link_to "Edit", edit_path(user), :class => 'action edit' %></td>
-            </tr>
-          <%elsif @threshold=="below" && user.points<@value%>
-              <tr>
-                <td><%=user.firstName + " "%><%= user.lastName%></td>
-                <td><%= user.points %></td>
-                <td><%= user.role %></td>
-                <td><%= link_to "Edit", edit_path(user), :class => 'action edit' %></td>
-              </tr>
-          <% end %>
-        <% end %>
-    </table>
-
-  </body>
-</html>
+</table>
