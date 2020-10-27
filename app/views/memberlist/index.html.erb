@@ -16,6 +16,9 @@
 <% @users.each do |user| %>
   <tr>
     <td><%user.points = user.id+2 %></td>
+    <% if user.role !="admin"%>
+      <td><%user.role = "member" %></td>
+    <% end %>
   </tr>
 <% end %>
 <h2>User List</h2>
@@ -28,6 +31,8 @@
     <%= filter.label(:namefilterlabel, "name") %>
     <%= filter.radio_button(:filtertype, "rolefilter") %>
     <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
     <%= filter.submit("Filter", :onclick=> "updateFilter") %>
   <% end %>
 <%elsif @filter =="rolefilter"%>
@@ -129,7 +134,7 @@
       <%if @filter=="namefilter"%>
         <%if @searchList.length()==0%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
@@ -137,13 +142,13 @@
           <%for word in @searchList%>
             <%if (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
             <%elsif (word ==user.firstName||word==user.lastName)%>
               <tr>
-                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
                 <td><%= user.points %></td>
                 <td><%= user.role %></td>
               </tr>
@@ -151,9 +156,21 @@
           <% end %>
         <% end %>
       <%elsif @filter=="rolefilter"%>
-        <%if user.role==@role%>
+        <%if @role=="admin"&& user.role =="admin"%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <%elsif @role=="member"&& user.role !="admin"%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <%elsif @role!="member"&& @role!="admin"%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
@@ -161,26 +178,26 @@
       <%elsif @filter=="pointfilter"%>
         <%if @threshold =="above" && user.points>@value%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <%elsif @threshold=="below" && user.points<@value%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <%elsif @threshold.nil?||@value.nil?%>
           <tr>
-            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
           </tr>
         <% end %>
       <%else%>
         <tr>
-          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(user), :class => 'action show') %></td>
+          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
           <td><%= user.points %></td>
           <td><%= user.role %></td>
         </tr>

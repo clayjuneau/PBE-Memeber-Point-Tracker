@@ -18,7 +18,11 @@
 
   <body>
  <%if @user.nil?%>
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <%= current_user.role %></h2>
+  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
+        <%=current_user.role %>
+    <%else%>
+      <%="member"%>
+    <%end%></h2>
     <p id="standing"></p>
 
     <table summary="User detail view">
@@ -42,7 +46,7 @@
           <th>Officer Eligibility</th>
           <td id="officerEligibility"></td>
         </tr>
-     </table>
+    </table>
   <%else%>
     <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
     <p id="standing"></p>
