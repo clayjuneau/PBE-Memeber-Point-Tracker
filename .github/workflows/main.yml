@@ -1,0 +1,18 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master # Changing the branch here would also work
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+        with:
+          heroku_api_key: "51ec15a0-2aa7-4b76-b6c6-fcf338d72b1c"
+          heroku_app_name: "pbe-mpt-staging" #Must be unique in Heroku
+          heroku_email: "rileydnorris@tamu.edu"
+          branch: "master"
