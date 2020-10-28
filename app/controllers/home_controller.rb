@@ -9,7 +9,7 @@ class HomeController < ApplicationController
         # Find the other team's user object by seeing which user has the same email as our user
         @events = Customer.includes(:events).where(:email => current_user.email)
         puts @events
-        if @events != nil
+        if @events == nil
             @events = []
         end
         
