@@ -115,4 +115,4 @@ production:
     events:
         migrations_paths: db/participation_migrate
         adapter: postgresql
-        url: <%= ENV["EVENTS_DB"] %>
+        url: <%= ENV["EVENTS_DB_URL"] %>
