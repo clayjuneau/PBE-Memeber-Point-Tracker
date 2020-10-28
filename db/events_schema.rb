@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_050108) do
+ActiveRecord::Schema.define(version: 2020_10_28_054544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,10 @@ ActiveRecord::Schema.define(version: 2020_10_28_050108) do
     t.index ["email"], name: "index_customers_on_email", unique: true
   end
 
-  create_table "customers_events", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "event_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "customers_events", id: false, force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["customer_id", "event_id"], name: "index_customers_events_on_customer_id_and_event_id"
   end
 
   create_table "events", force: :cascade do |t|
