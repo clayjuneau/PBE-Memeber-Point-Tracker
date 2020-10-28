@@ -26,7 +26,7 @@ development:
         <<: *default
         adapter: postgresql
         encoding: unicode
-        database: <%= ENV["PBE_MAIN_DBNAME"] + '_development' %>
+        database: <%= ENV["PBE_MAIN_DEV_DBNAME"] %>
         pool: 5
         username: <%= ENV["PBE_MAIN_USERNAME"] %>
         password: <%= ENV["PBE_MAIN_PASSWORD"] %>
@@ -34,7 +34,7 @@ development:
         <<: *default
         adapter: postgresql
         encoding: unicode
-        database: <%= ENV["PBE_PARTICIPATION_DBNAME"] + '_development' %>
+        database: <%= ENV["PBE_PARTICIPATION_DEV_DBNAME"] %>
         pool: 5
         username: <%= ENV["PBE_PARTICIPATION_USERNAME"] %>
         password: <%= ENV["PBE_PARTICIPATION_PASSWORD"] %>
@@ -75,7 +75,7 @@ test:
         <<: *default
         adapter: postgresql
         encoding: unicode
-        database: <%= ENV["PBE_MAIN_DBNAME"] + '_test' %>
+        database: <%= ENV["PBE_MAIN_TEST_DBNAME"] %>
         pool: 5
         username: <%= ENV["PBE_MAIN_USERNAME"] %>
         password: <%= ENV["PBE_MAIN_PASSWORD"] %>
@@ -83,7 +83,7 @@ test:
         <<: *default
         adapter: postgresql
         encoding: unicode
-        database: <%= ENV["PBE_PARTICIPATION_DBNAME"] + '_test' %>
+        database: <%= ENV["PBE_PARTICIPATION_TEST_DBNAME"] %>
         pool: 5
         username: <%= ENV["PBE_PARTICIPATION_USERNAME"] %>
         password: <%= ENV["PBE_PARTICIPATION_PASSWORD"] %>
