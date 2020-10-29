@@ -1,22 +1,10 @@
 //The purpose of this function is to calculate and display the member's standing
 
-/*document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function(event) {
     standingCheck();
-})*/
+})
 
-if( document.readyState !== 'loading' ) {
-    console.log( 'document is already ready, just execute code here' );
-    standingCheck();
-} 
-else {
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log( 'document was not ready, place code here' );
-        standingCheck();
-    });
-}
-
-function standingCheck() {
-	console.log('document triggered standingCheck');
+function standingCheck(){
     var testEventsAttended = 10; 
     var testEventsTotal = 15; 
     var i = testEventsAttended / testEventsTotal;
