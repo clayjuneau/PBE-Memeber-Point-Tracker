@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     post 'memberlist', to: 'memberlist#update'
     post '/filter', to: 'memberlist#updateFilter'
 
+    
+    get 'edit', to: 'users#edit'
+    
     # Defines the start page of the application
     root 'home#index'
 end

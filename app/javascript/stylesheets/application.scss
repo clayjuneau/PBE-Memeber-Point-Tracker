@@ -26,7 +26,7 @@ th, td {
 }
 
 footer {
-    background:#6cf;
+    background: #77cfe7;;
     position:absolute;
     bottom: 0;
     width: 100%;
@@ -43,12 +43,16 @@ footer {
     padding-bottom: 10px;
 }
 
-#home-icon {
-    color: #000000;
+.btn-custom {
+    background-color: #77cfe7 !important;
 }
 
 .login-form-spacing {
     padding-right: 100px;
+}
+
+#home-icon {
+    color: #000000;
 }
 
 #links {

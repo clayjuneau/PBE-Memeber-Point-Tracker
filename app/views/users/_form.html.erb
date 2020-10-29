@@ -1,0 +1,19 @@
+<table class="login-form-spacing">
+        <tr>
+          <th>Email:</th>
+          <td><%= f.text_field :email, placeholder: 'Email'%></td>
+        </tr>
+        <tr>
+          <th>First Name:</th>
+          <td><%= f.text_field :firstName, placeholder: 'First Name'%></td>
+        </tr>
+        <tr>
+          <th>Last Name:</th>
+          <td><%= f.text_field :lastName, placeholder: 'Last Name'%></td>
+        </tr>
+        <tr>
+          <th>Password:</th>
+          <td><%= f.password_field :password, placeholder: 'Password'%></td>
+        </tr>
+    </table>
+<%= f.submit %> 
