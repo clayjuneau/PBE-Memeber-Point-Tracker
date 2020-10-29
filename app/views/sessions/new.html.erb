@@ -11,7 +11,11 @@
   <body>
     <%= image_tag 'logo.jpg' %>
     <h2 class = "bottom-space">Point Tracker Login</h2>
-
+    <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <p style="color:red;"><%= flash[:notice] %></p>
+      </div>
+    <% end %>
     <%= form_tag '/login' do %>
       <table class="login-form-spacing">
         <tr>
