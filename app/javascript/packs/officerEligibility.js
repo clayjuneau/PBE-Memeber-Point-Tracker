@@ -9,9 +9,9 @@ function officerEligibility(){
 	var testEventsTotal = 15; 
 	var i = testEventsAttended / testEventsTotal;
 	if(i >= 0.8){
-		document.getElementById("officerEligibility").innerHTML = "You are eligible"; 
+		document.getElementById("officerEligibility").innerHTML = "Yes"; 
 	}
 	else{
-		document.getElementById("officerEligibility").innerHTML = "You are not eligible";
+		document.getElementById("officerEligibility").innerHTML = "No";
 	}
 }
