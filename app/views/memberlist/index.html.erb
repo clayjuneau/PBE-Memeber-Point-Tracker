@@ -33,7 +33,7 @@
 <%if @filter =="namefilter"%>
 <%= form_with do |form|%>
 <%= form.label(:q, "Search For Users With the Name") %>
-<%= form.text_field(:name, value: @searchName) %>
+<%= form.text_field(:name, value: @searchList) %>
 <%= form.submit("Search") %>
 <% end %>
 
@@ -54,7 +54,7 @@
 <%= form.label(:threshold_above, "Above") %>
 <%= form.radio_button(:threshold, "below", :checked => @threshold =="below") %>
 <%= form.label(:threshold_below, "Below") %>
-<%= form.number_field(:q, value:@value) %>
+<%= form.number_field(:q, value: @points) %>
 <%= form.submit("Search") %>
 <% end %>
 <% end %>
