@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
     get 'memberlist', to: 'memberlist#index'
     post 'memberlist', to: 'memberlist#update'
-    post '/filter', to: 'memberlist#updateFilter'
 
     
     get 'edit', to: 'users#edit'
