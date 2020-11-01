@@ -6,6 +6,8 @@ class HomeController < ApplicationController
             @user = User.find(params[:id])
         end
 
-        @events = Event.includes(:customers).where(customers: { email: current_user.email })
+        if @user == nil
+            @user = current_user
+        end
     end
 end
