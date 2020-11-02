@@ -23,7 +23,7 @@
     <%else%>
       <%="member"%>
     <%end%></h2>
-    <p id="standing"></p>
+    <p id="standing" style="color:rgb(<%=(10/15) >= 0.5 ? "188,86,86" : "86,188,127"%>"><%=(10/15) >= 0.5 ? "You are currently in poor standing." : "You are currently in good standing!"%></p>
 
     <table summary="User detail view">
         <tr>
@@ -49,7 +49,7 @@
     </table>
   <%else%>
     <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
-    <p id="standing"></p>
+    <p id="standing" style="color:rgb(<%=(10/15) >= 0.5 ? "188,86,86" : "86,188,127"%>"></p>
 
     <table summary="User detail view">
         <tr>

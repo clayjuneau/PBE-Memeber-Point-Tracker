@@ -1,7 +1,7 @@
 //The purpose of this function is to calculate and display the member's standing
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    standingCheck();
+    //standingCheck();
 })
 
 function standingCheck(){
@@ -15,7 +15,7 @@ function standingCheck(){
 		document.getElementById('standing').style.color = "rgb(86,188,127)";
     }
     else{
-        document.getElementById("standing").innerHTML = "You are not currently in good standing.";
-		document.getElementById('standing').style.color = "rgb(188,86,50)";
+        document.getElementById("standing").innerHTML = "You are currently in poor standing.";
+		document.getElementById('standing').style.color = "rgb(188,86,86)";
     }
 }
