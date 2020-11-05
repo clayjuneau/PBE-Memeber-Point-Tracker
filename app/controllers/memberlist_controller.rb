@@ -53,8 +53,8 @@ class MemberlistController < ApplicationController
 
     def update_event_points
         event = Event.find(params[:event][:saved_event_id])
-        if event.update_attributes(:points => params[:event]["event_points"].to_i)
-            puts "Worked!"
+        if event.update(:points => params[:event]["event_points"].to_i)
         end
+        flash.now[:notice] = 'Request was saved successfully.'
     end
 end

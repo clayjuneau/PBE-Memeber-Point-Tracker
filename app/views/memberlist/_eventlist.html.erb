@@ -15,8 +15,11 @@
     <%= f.label event.mandatory, :class => 'edit-points__column' %>
     <div style="display: inline-block">
         <%= f.text_field :event_points, value: event.points, :style => 'width: 96px; display: inline-block' %>
-        <%= f.submit "Save", :style => 'width: 50px; display: inline-block' %>
+        <%= f.submit "Save", data: { disable_with: false }, :style => 'width: 50px; display: inline-block' %>
     </div>
 </div>
 <% end %>
 <% end %>
+<script>
+    $('#flash-messages').html("<%= j render 'shared/flash' %>");
+</script>
