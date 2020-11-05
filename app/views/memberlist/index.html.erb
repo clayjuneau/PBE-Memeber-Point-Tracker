@@ -190,14 +190,14 @@
               <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
               <td><%= user.points %></td>
               <td><%= user.role %></td>
-              <td><%= link_to "Edit", edit_path(user), :class => 'action edit' %></td>
+              <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
             </tr>
           <%elsif @threshold.nil?||@value.nil?%>
             <tr>
               <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
               <td><%= user.points %></td>
               <td><%= user.role %></td>
-              <td><%= link_to "Edit", edit_path(user), :class => 'action edit' %></td>
+              <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
             </tr>
           <% end %>
         <%else%>
@@ -205,7 +205,7 @@
             <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
             <td><%= user.role %></td>
-            <td><%= link_to "Edit", edit_path(user), :class => 'action edit' %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
           </tr>
         <% end %>
       <% end %>

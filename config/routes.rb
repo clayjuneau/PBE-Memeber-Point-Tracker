@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
     # Allow signup for users
-    resources :users, only: [:new, :create]
+    resources :users, only: [:new, :create, :edit, :update]
 
     # Allow login/logout for users
     get 'login', to: 'sessions#new'
