@@ -43,6 +43,7 @@ th, td {
 	padding-right: 25px;
 }
 
+
 .navbar .navbar-nav {
     display: inline-block;
     float: none;
@@ -53,12 +54,16 @@ th, td {
     padding-bottom: 10px;
 }
 
-#home-icon {
-    color: #000000;
+.btn-custom {
+    background-color: #77cfe7 !important;
 }
 
 .login-form-spacing {
     padding-right: 100px;
+}
+
+#home-icon {
+    color: #000000;
 }
 
 #links {
