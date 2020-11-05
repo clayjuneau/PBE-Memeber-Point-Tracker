@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <% flash.each do |name, msg| %>
-                <%= content_tag(:div, msg, :id=>"#{name}") %>
+                <%= content_tag(:div, msg, :id=>"#{name}", :class => name == "notice" ? 'notice' : 'alert') %>
                 <%end%>
             </div>
         </div>
@@ -37,5 +37,5 @@
 </html>
 
 <script type="text/javascript">
-    window.setTimeout("document.getElementById('notice').style.display = 'none';", 2000);
+    window.setTimeout("document.getElementById('notice').style.display = 'none';", 3000);
 </script>

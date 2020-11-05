@@ -15,11 +15,10 @@ Rails.application.routes.draw do
     post 'memberlist', to: 'memberlist#update'
     get 'event_points', to: 'memberlist#event_points'
     put 'update_event_points', to: 'memberlist#update_event_points'
-
-    # resources :events, only: [:update]
-
     
     get 'edit', to: 'users#edit'
+    get 'change_password', to: 'users#change_password'
+    put 'update_password', to: 'users#update_password'
     
     # Defines the start page of the application
     root 'home#index'

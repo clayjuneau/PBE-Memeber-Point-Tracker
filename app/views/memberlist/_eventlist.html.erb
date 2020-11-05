@@ -14,8 +14,8 @@
     <%= f.label event.date, :class => 'edit-points__column' %>
     <%= f.label event.mandatory, :class => 'edit-points__column' %>
     <div style="display: inline-block">
-        <%= f.text_field :event_points, value: event.points, :style => 'width: 96px; display: inline-block' %>
-        <%= f.submit "Save", data: { disable_with: false }, :style => 'width: 50px; display: inline-block' %>
+        <%= f.text_field :event_points, value: event.points, :style => 'width: 96px; display: inline-block', :class => 'text-field' %>
+        <%= f.submit "Save", data: { disable_with: false }, :style => 'width: 50px; display: inline-block', :class => '"btn btn-primary"' %>
     </div>
 </div>
 <% end %>

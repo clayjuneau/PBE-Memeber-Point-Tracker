@@ -15,9 +15,9 @@ class SessionsController < ApplicationController
             redirect_to home_path
         else
             if @user.nil?
-              flash[:notice] = "No account found for #{params[:email]}, please sign up."
+              flash[:alert] = "No account found for #{params[:email]}, please sign up."
             else
-              flash[:notice] = "Your password is incorrect."
+              flash[:alert] = "Your password is incorrect."
             end
             redirect_to login_path
         end
