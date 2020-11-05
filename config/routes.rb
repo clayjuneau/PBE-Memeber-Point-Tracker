@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
     # Allow signup for users
-    resources :users, only: [:new, :create]
+    resources :users, only: [:new, :create, :edit, :update]
 
     # Allow login/logout for users
     get 'login', to: 'sessions#new'
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     post 'memberlist', to: 'memberlist#update'
     post '/filter', to: 'memberlist#updateFilter'
 
+    
+    get 'edit', to: 'users#edit'
+    
     # Defines the start page of the application
     root 'home#index'
 
