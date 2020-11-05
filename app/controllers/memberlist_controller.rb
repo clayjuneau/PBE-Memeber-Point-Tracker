@@ -18,7 +18,7 @@ class MemberlistController < ApplicationController
 
     # Maps to a View
     def event_points
-        @events = Event.all()
+        @events = Event.all().order(:date)
     end
     
     def update
@@ -52,7 +52,7 @@ class MemberlistController < ApplicationController
     end
 
     def update_event_points
-        event = Event.find(params[:event]["saved_event_id"])
+        event = Event.find(params[:event][:saved_event_id])
         if event.update_attributes(:points => params[:event]["event_points"].to_i)
             puts "Worked!"
         end

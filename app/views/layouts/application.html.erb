@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title><%= yield(:title) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -8,17 +9,17 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-	<%= favicon_link_tag asset_path('favicon.ico') %>
-  </head>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+</head>
 
-  <body>
+<body>
     <%= yield %>
-  </body>
+</body>
 
-  <br><br>
+<br><br>
 
-  <footer>
+<footer>
     <p id="footer-text">Get in contact with the Brotherhood! <a id="footer-link" href="mailto:pbe.tamu@gmail.com">pbe.tamu@gmail.com</a></p>
-  </footer>
+</footer>
 
 </html>
