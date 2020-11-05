@@ -14,8 +14,9 @@
   </head>
 
   <body>
- <%if @user.nil?%>
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
+  <%if @user.nil?%>
+  
+    <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
         <%=current_user.role %>
     <%else%>
       <%="member"%>
