@@ -7,8 +7,8 @@
     <% @users.each do |user| %>
     <tr>
         <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-        <td><%= user.points %></td>
-        <td><%= user.role %></td>
+        <td><%= user_events(user.id).sum(&:points) %></td>
+        <td><%= user.role.capitalize %></td>
     </tr>
     <% end %>
 </table>

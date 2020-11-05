@@ -1,4 +1,5 @@
 <head>
+    <% content_for :title, "PBE Member List" %>
     <nav class="navbar navbar-light bg-light navbar-fixed-top">
         <div class="navbar-header">
             <%= link_to home_path do %>
@@ -9,11 +10,13 @@
         <h1>Professional Brotherhood of Engineers</h1>
 
         <div class="navbar-nav navbar-right">
-            <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+            <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-primary" %>
         </div>
     </nav>
 </head>
 
 <h2>Edit Event Points</h2>
+
+<%= link_to 'Return to User List', memberlist_path %>
 
 <%= render 'eventlist', locals: { events: @events } %>

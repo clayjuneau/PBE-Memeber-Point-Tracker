@@ -17,15 +17,17 @@
 
 <h2>User List</h2>
 
+<%= link_to 'Edit Event Points', event_points_path %>
+
 <%= form_with  do |filter|%>
 <%= filter.label(:f, "Filter users by: ") %>
-<%= filter.radio_button(:filtertype, "pointfilter", :checked => @filter =="pointfilter", :onclick => "document.getElementById('filterButton').click()")) %>
+<%= filter.radio_button(:filtertype, "pointfilter", :checked => @filter =="pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
 <%= filter.label(:pointfilterlabel, "number of points") %>
-<%= filter.radio_button(:filtertype, "namefilter", :checked => @filter =="namefilter", :onclick => "document.getElementById('filterButton').click()")) %>
+<%= filter.radio_button(:filtertype, "namefilter", :checked => @filter =="namefilter", :onclick => "document.getElementById('filterButton').click()") %>
 <%= filter.label(:namefilterlabel, "name") %>
-<%= filter.radio_button(:filtertype, "rolefilter", :checked => @filter =="rolefilter", :onclick => "document.getElementById('filterButton').click()")) %>
+<%= filter.radio_button(:filtertype, "rolefilter", :checked => @filter =="rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
 <%= filter.label(:rolefilterlabel, "role") %>
-<%= filter.radio_button(:filtertype, "nofilter", :checked => @filter =="nofilter", :onclick => "document.getElementById('filterButton').click()")) %>
+<%= filter.radio_button(:filtertype, "nofilter", :checked => @filter =="nofilter", :onclick => "document.getElementById('filterButton').click()") %>
 <%= filter.label(:nofilterlabel, "nothing") %>
 <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
 <% end %>
@@ -58,7 +60,5 @@
 <%= form.submit("Search") %>
 <% end %>
 <% end %>
-
-<%= link_to 'Edit Event Points', event_points_path %>
 
 <%= render 'memberlist', locals: { users: @users } %>

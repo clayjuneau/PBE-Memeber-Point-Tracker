@@ -36,14 +36,17 @@ class MemberlistController < ApplicationController
     def getFilteredUsers
         case
         when @filter == "namefilter" && @searchList != []
-            @users = User.where(firstName: @searchList).or(User.where(lastName: @searchList)).order('id ASC')
+            @users = User.where(firstName: @searchList).or(User.where(lastName: @searchList)).order(:firstName)
         when @filter == "rolefilter" && @role != nil
-            @users = User.where(role: @role).order('id ASC')
+            @users = User.where(role: @role).order(:firstName)
         when @filter == "pointfilter" && @points != nil && @threshold != nil
-            sign = @threshold == "above" ? '>' : '<'
-            @users = User.where("points #{sign} ?", @points).order('id ASC')
+            if @threshold == "above"
+                @users = User.all().order(:firstName).select { |user| user_events(user.id).sum(&:points) > @points }
+            else
+                @users = User.all().order(:firstName).select { |user| user_events(user.id).sum(&:points) < @points }
+            end
         else
-            @users = User.order('id ASC')
+            @users = User.order(:firstName)
         end
 
         if @users == nil
@@ -54,7 +57,7 @@ class MemberlistController < ApplicationController
     def update_event_points
         event = Event.find(params[:event][:saved_event_id])
         if event.update(:points => params[:event]["event_points"].to_i)
+            redirect_to event_points_path, :notice => 'Success!'
         end
-        flash.now[:notice] = 'Request was saved successfully.'
     end
 end

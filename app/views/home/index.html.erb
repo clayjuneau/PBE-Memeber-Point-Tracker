@@ -15,8 +15,10 @@
 </head>
 
 <body>
-    <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
-    <p class="standing" id="standing"></p>
+    <h2><%= @user.firstName %> <%= @user.lastName %> | <%= @user.role.capitalize %></h2>
+    <% if current_user.id == @user.id %>
+    <p class="standing"><%= (user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are in good standing!" : "" %></p>
+    <% end %>
 
     <table summary="User detail view">
         <tr>
@@ -29,11 +31,11 @@
         </tr>
         <tr>
             <th class="indextable">Membership Eligibility</th>
-            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are eligible" : "You are not eligible"%></td>
+            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "Eligible" : "Not eligible"%></td>
         </tr>
         <tr>
             <th class="indextable">Officer Eligibility</th>
-            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.8 ? "You are eligible" : "You are not eligible"%></td>
+            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.8 ? "Eligible" : "Not eligible"%></td>
         </tr>
     </table>
 
