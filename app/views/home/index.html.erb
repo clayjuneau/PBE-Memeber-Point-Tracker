@@ -14,10 +14,11 @@
     </nav>
 </head>
 
+
 <body>
     <h2><%= @user.firstName %> <%= @user.lastName %> | <%= @user.role.capitalize %></h2>
     <% if current_user.id == @user.id %>
-    <p class="standing"><%= (user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are in good standing!" : "" %></p>
+    <p class="standing" style="color:rgb(<%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "86,188,127" : "188,86,86"%>)"><%= (user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are currently in good standing!" : "You are currently in poor standing." %></p>
     <% end %>
 
     <table summary="User detail view">
