@@ -24,7 +24,8 @@ h6, p {
 }
 
 .standing {
-	text-align: center;
+    text-align: center;
+    color: rgb(86,188,127);
 }
 
 table {
@@ -68,6 +69,7 @@ th, td {
 
 #links {
     padding-top: 50px;
+    margin-bottom: 50px;
 }
 
 // FOOTER -------------------
@@ -118,4 +120,14 @@ footer {
 // This is for the question asking if someone already has an account / doesn't have an account yet
 .question-link {
     color: #4A8494;
+}
+
+.edit-points__column {
+    width: 150px;
+    display: inline-block;
+    text-align: left;
+}
+
+.edit-points__inline {
+    display: inline-block;
 }

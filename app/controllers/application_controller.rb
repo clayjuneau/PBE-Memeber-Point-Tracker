@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
     # Expose helper methods to the entire application
     helper_method :current_user
+    helper_method :user_events
+    helper_method :mandatory_events
     helper_method :is_logged_in?
     helper_method :is_admin?
     helper_method :authorize_admin
@@ -16,6 +18,15 @@ class ApplicationController < ActionController::Base
     # Retrieves the current logged in user
     def current_user    
         User.find_by(id: session[:user_id])  
+    end
+
+    def user_events(user_id = current_user.id)
+        user = User.find_by(id: user_id)
+        return Event.includes(:customers).where(customers: { email: user.email })
+    end
+
+    def mandatory_events
+        Event.all().where(mandatory: true)
     end
     
     # Checks that the user is logged in
