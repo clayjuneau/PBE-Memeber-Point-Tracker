@@ -1,4 +1,5 @@
 <head>
+    <% content_for :title, "PBE Member List" %>
     <nav class="navbar navbar-light bg-light navbar-fixed-top">
       <div class = "navbar-header">
         <%= link_to home_path do %>
@@ -9,7 +10,7 @@
       <h1>Professional Brotherhood of Engineers</h1>
 
       <div class = "navbar-nav navbar-right">
-        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-primary" %>
       </div>
     </nav>
 </head>
@@ -26,13 +27,13 @@
   <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.label(:pointfilterlabel, "Number of Points") %>
     <%= filter.radio_button(:filtertype, "namefilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.label(:namefilterlabel, "Name") %>
     <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.label(:rolefilterlabel, "Role") %>
     <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.label(:nofilterlabel, "Nothing") %>
     <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
   <% end %>
   <%= form_with do |form|%>
@@ -79,13 +80,13 @@
   <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.label(:pointfilterlabel, "Number of Points") %>
     <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.label(:namefilterlabel, "Name") %>
     <%= filter.radio_button(:filtertype, "rolefilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.label(:rolefilterlabel, "Role") %>
     <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.label(:nofilterlabel, "Nothing") %>
     <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
   <% end %>
   <%if @role =="admin"%>
@@ -142,13 +143,13 @@
   <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.label(:pointfilterlabel, "Number of Points") %>
     <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.label(:namefilterlabel, "Name") %>
     <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.label(:rolefilterlabel, "Role") %>
     <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.label(:nofilterlabel, "Nothing") %>
     <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
   <% end %>
   <%if @threshold =="below"%>
@@ -207,13 +208,13 @@
   <%= form_with(:method => "post") do |filter|%>
     <%= filter.label(:f, "Filter users by: ") %>
     <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.label(:pointfilterlabel, "Number of Points") %>
     <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.label(:namefilterlabel, "Name") %>
     <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.label(:rolefilterlabel, "Role") %>
     <%= filter.radio_button(:filtertype, "nofilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
-    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.label(:nofilterlabel, "Nothing") %>
     <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
   <% end %>
   <table summary="User detail view">
