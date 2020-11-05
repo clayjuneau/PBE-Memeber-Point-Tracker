@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% content_for :title, "PBE Point Tracker Sign Up" %>
     <nav class="navbar navbar-light bg-light">
-      <div class = "navbar-header">
-        <%= link_to home_path do %>
-          <%= fa_icon "home", size: '3x', id: "home-icon" %>
-        <% end %>
-      </div>
-
-      <h1>Professional Brotherhood of Engineers</h1>
-
-      <div class = "navbar-nav navbar-right">
-        <%= button_to "Login", login_path, method: "get", :class => "btn btn-lg" %>
-      </div>
+      <ul class = "navbar-nav navbar">
+        <%= link_to "About", "/about", :class => "btn btn-light" %>
+      </ul>
+      <h3>Professional Brotherhood of Engineers</h3>
+      
+      <ul class = "navbar-nav navbar-right">
+        <%= button_to "Login", login_path, method: "get", :class => "btn btn-primary" %>
+      </ul>
     </nav>
   </head>
+    <%= image_tag 'logo.jpg' %>
+    <h2 class = "bottom-space">Point Tracker Sign Up</h2>
 
-  <h2 class = "bottom-space">Sign Up</h2>
+    <%= simple_form_for @user do |f|%>
+      <table class="login-form-spacing">
+          <tr>
+            <th>Email:</th>
+            <td><%= f.text_field :email, placeholder: 'sample@tamu.edu', :class => "text-field"%></td>
+          </tr>
+          <tr>
+            <th>First Name:</th>
+            <td><%= f.text_field :firstName, placeholder: 'John', :class => "text-field"%></td>
+          </tr>
+          <tr>
+            <th>Last Name:</th>
+            <td><%= f.text_field :lastName, placeholder: 'Smith', :class => "text-field"%></td>
+          </tr>
+          <tr>
+            <th>Password:</th>
+            <td><%= f.password_field :password, placeholder: 'Password', :class => "text-field"%></td>
+          </tr>
+      </table>
+      <%= f.submit "Create User", :class => "btn btn-primary" %>
+    <%end%>
 
-  <%= simple_form_for @user do |f|%>
-    <table class="login-form-spacing">
-        <tr>
-          <th>Email:</th>
-          <td><%= f.text_field :email, placeholder: 'Email'%></td>
-        </tr>
-        <tr>
-          <th>First Name:</th>
-          <td><%= f.text_field :firstName, placeholder: 'First Name'%></td>
-        </tr>
-        <tr>
-          <th>Last Name:</th>
-          <td><%= f.text_field :lastName, placeholder: 'Last Name'%></td>
-        </tr>
-        <tr>
-          <th>Password:</th>
-          <td><%= f.password_field :password, placeholder: 'Password'%></td>
-        </tr>
-    </table>
-    <%= f.submit %>
-  <%end%>
+    <br>
+      <%= link_to "Already have an account? Login.", login_path, :class => "question-link" %>
+    <br>
 
-
+  
 
 </html>

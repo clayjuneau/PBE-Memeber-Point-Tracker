@@ -1,86 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
+    <% content_for :title, "PBE Member Profile" %>
     <nav class="navbar navbar-light bg-light">
-      <div class = "navbar-header">
-        <%= link_to home_path do %>
-          <%= fa_icon "home", size: '3x', id: "home-icon" %>
-        <% end %>
-      </div>
+        <ul class="navbar-nav navbar"></ul>
 
-      <h1>Professional Brotherhood of Engineers</h1>
+        <h3>Professional Brotherhood of Engineers</h3>
 
-      <div class = "navbar-nav navbar-right">
-        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
-      </div>
+        <div class="navbar-nav navbar-right">
+            <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-primary" %>
+        </div>
     </nav>
-  </head>
+</head>
 
-  <body>
- <%if @user.nil?%>
-  <h2><%= current_user.firstName %> <%= current_user.lastName %>, <% if current_user.role?%>
-        <%=current_user.role %>
-    <%else%>
-      <%="member"%>
-    <%end%></h2>
-    <p id="standing" style="color:rgb(<%=(10/15) >= 0.5 ? "188,86,86" : "86,188,127"%>"><%=(10/15) >= 0.5 ? "You are currently in poor standing." : "You are currently in good standing!"%></p>
+
+<body>
+    <h2><%= @user.firstName %> <%= @user.lastName %> | <%= @user.role.capitalize %></h2>
+    <% if current_user.id == @user.id %>
+    <p class="standing" style="color:rgb(<%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "86,188,127" : "188,86,86"%>"><%= (user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are currently in good standing! : "You are currently in poor standing." %></p>
+    <% end %>
 
     <table summary="User detail view">
         <tr>
-          <th>Current Points</th>
-          <td><% if current_user.points?%>
-                <%=current_user.points %>
-            <%else%>
-              <%=0%>
-            <%end%></td>
+            <th class="indextable">Current Points</th>
+            <td class="indextable"><%= user_events(@user.id).sum(&:points) %></td>
         </tr>
         <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
+            <th class="indextable">Percent Attendance</th>
+            <td class="indextable"><%=((user_events(@user.id).count.to_f / mandatory_events.count.to_f) * 100).round%>%</td>
         </tr>
         <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
+            <th class="indextable">Membership Eligibility</th>
+            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "Eligible" : "Not eligible"%></td>
         </tr>
         <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
+            <th class="indextable">Officer Eligibility</th>
+            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.8 ? "Eligible" : "Not eligible"%></td>
         </tr>
     </table>
-  <%else%>
-    <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
-    <p id="standing"></p>
-
-    <table summary="User detail view">
-        <tr>
-          <th>Current Points</th>
-          <td><% if @user.points?%>
-                <%=@user.points %>
-            <%else%>
-              <%=0%>
-            <%end%></td>
-        </tr>
-        <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
-        </tr>
-        <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
-        </tr>
-        <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
-        </tr>
-    </table>
-  <%end%>
 
     <div id="links">
-      <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
-      <% if is_admin?%>
-        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
-      <% end %>
+        <% if is_admin?%>
+        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-primary" %>
+        <% end %>
     </div>
 
-  </body>
+    <h3>Event Participation</h3>
+    <table summary="Event view">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+        <% user_events(@user.id).each do |event| %>
+        <tr>
+            <td><%= event.title %></td>
+            <td><%= event.description %></td>
+            <td><%= event.date %></td>
+        </tr>
+        <% end %>
+    </table>
+
+</body>
+
 </html>

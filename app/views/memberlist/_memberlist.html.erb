@@ -1,0 +1,15 @@
+<table summary="User detail view">
+    <tr class="header">
+        <th>Name</th>
+        <th>Points</th>
+        <th>Role</th>
+    </tr>
+    <% @users.each do |user| %>
+    <tr>
+        <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+        <td><%= user_events(user.id).sum(&:points) %></td>
+        <td><%= user.role.capitalize %></td>
+        <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+    </tr>
+    <% end %>
+</table>

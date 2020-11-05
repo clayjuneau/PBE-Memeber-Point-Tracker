@@ -11,9 +11,11 @@ function standingCheck(){
     var changingDiv = document.getElementById('standing');
 
     if(i >= 0.5){
-        document.getElementById('standing').innerHTML = "You are currently in good standing"; 
+        document.getElementById('standing').innerHTML = "You are currently in good standing!"; 
+		document.getElementById('standing').style.color = "rgb(86,188,127)";
     }
     else{
-        document.getElementById("standing").innerHTML = "You are not currently in good standing";
+        document.getElementById("standing").innerHTML = "You are currently in poor standing.";
+		document.getElementById('standing').style.color = "rgb(188,86,86)";
     }
 }
