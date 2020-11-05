@@ -1,4 +1,6 @@
 class MemberlistController < ApplicationController
+    
+    # Maps to a View
     def index
         @filter = session[:filtertype]
         @threshold = session[:threshold]
@@ -12,6 +14,11 @@ class MemberlistController < ApplicationController
         end
         
         getFilteredUsers
+    end
+
+    # Maps to a View
+    def event_points
+        @events = Event.all()
     end
     
     def update
@@ -41,6 +48,13 @@ class MemberlistController < ApplicationController
 
         if @users == nil
             @users = []
+        end
+    end
+
+    def update_event_points
+        event = Event.find(params[:event]["saved_event_id"])
+        if event.update_attributes(:points => params[:event]["event_points"].to_i)
+            puts "Worked!"
         end
     end
 end

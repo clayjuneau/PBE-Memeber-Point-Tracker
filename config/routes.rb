@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
     get 'memberlist', to: 'memberlist#index'
     post 'memberlist', to: 'memberlist#update'
+    get 'event_points', to: 'memberlist#event_points'
+    put 'update_event_points', to: 'memberlist#update_event_points'
+
+    # resources :events, only: [:update]
 
     
     get 'edit', to: 'users#edit'

@@ -1,0 +1,19 @@
+<table summary="Event table">
+    <tr class="header">
+        <th>Title</th>
+        <th>Date</th>
+        <th>Mandatory</th>
+        <th>Points</th>
+    </tr>
+    <% @events.each do |event| %>
+    <%= form_for :event, url:{ :controller=> 'memberlist', :action=> 'update_event_points'}, html: { method:'put' } do |f| %>
+    <tr>
+        <%= f.hidden_field :saved_event_id, value: event.id %>
+        <td><%= event.title %></td>
+        <td><%= event.date %></td>
+        <td><%= event.mandatory %></td>
+        <td><%= f.text_field :event_points, value: event.points %> <%= f.submit %></td>
+    </tr>
+    <% end %>
+    <% end %>
+</table>
