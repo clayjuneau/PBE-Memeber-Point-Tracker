@@ -22,7 +22,7 @@
 <%= form_with  do |filter|%>
 <%= filter.label(:f, "Filter users by: ") %>
 <%= filter.radio_button(:filtertype, "pointfilter", :checked => @filter =="pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
-<%= filter.label(:pointfilterlabel, "Number of points") %>
+<%= filter.label(:pointfilterlabel, "Number of Points") %>
 <%= filter.radio_button(:filtertype, "namefilter", :checked => @filter =="namefilter", :onclick => "document.getElementById('filterButton').click()") %>
 <%= filter.label(:namefilterlabel, "Name") %>
 <%= filter.radio_button(:filtertype, "rolefilter", :checked => @filter =="rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
