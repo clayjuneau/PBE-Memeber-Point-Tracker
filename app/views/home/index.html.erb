@@ -3,15 +3,12 @@
   <head>
     <% content_for :title, "PBE Member Profile" %>
     <nav class="navbar navbar-light bg-light">
-      <div class = "navbar-header">
-        <%= link_to home_path do %>
-          <%= fa_icon "home", size: '3x', id: "home-icon" %>
-        <% end %>
-      </div>
-      <h1>Professional Brotherhood of Engineers</h1>
+      <ul class = "navbar-nav navbar">
+      </ul>
+      <h3>Professional Brotherhood of Engineers</h1>
 
       <div class = "navbar-nav navbar-right">
-        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-primary" %>
       </div>
     </nav>
   </head>
@@ -27,24 +24,24 @@
 
     <table summary="User detail view">
         <tr>
-          <th>Current Points</th>
-          <td><% if current_user.points?%>
+          <th class="indextable">Current Points</th>
+          <td class="indextable"><% if current_user.points?%>
                 <%=current_user.points %>
             <%else%>
               <%=0%>
             <%end%></td>
         </tr>
-        <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
+        <tr class="indextable">
+          <th class="indextable">Percent Attendance</th>
+          <td  class="indextable" id="percentAttendance"></td>
+        </tr>
+        <tr class="indextable">
+          <th class="indextable">Membership Eligibility</th>
+          <td class="indextable" id="membershipEligibility"></td>
         </tr>
         <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
-        </tr>
-        <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
+          <th class="indextable">Officer Eligibility</th>
+          <td class="indextable" id="officerEligibility"></td>
         </tr>
     </table>
   <%else%>
@@ -53,32 +50,32 @@
 
     <table summary="User detail view">
         <tr>
-          <th>Current Points</th>
-          <td><% if @user.points?%>
+          <th class="indextable">Current Points</th>
+          <td class="indextable"><% if @user.points?%>
                 <%=@user.points %>
             <%else%>
               <%=0%>
             <%end%></td>
         </tr>
         <tr>
-          <th>Percent Attendance</th>
-          <td id="percentAttendance"></td>
+          <th class="indextable">Percent Attendance</th>
+          <td class="indextable" id="percentAttendance"></td>
         </tr>
         <tr>
-          <th>Membership Eligibility</th>
-          <td id="membershipEligibility"></td>
+          <th class="indextable">Membership Eligibility</th>
+          <td class="indextable" id="membershipEligibility"></td>
         </tr>
         <tr>
-          <th>Officer Eligibility</th>
-          <td id="officerEligibility"></td>
+          <th class="indextable">Officer Eligibility</th>
+          <td class="indextable" id="officerEligibility"></td>
         </tr>
     </table>
   <%end%>
 
     <div id="links">
-      <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-lg btn-primary" %><br>
+      <%= button_to "View My Events", "#", :method => "get", :class => "btn btn-primary" %><br>
       <% if is_admin?%>
-        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-lg btn-primary" %>
+        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-primary" %>
       <% end %>
     </div>
 

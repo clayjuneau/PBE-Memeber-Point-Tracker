@@ -19,7 +19,7 @@
     <h2 class = "bottom-space">Point Tracker Login</h2>
     <% if !flash[:notice].blank? %>
       <div class="notice">
-        <p style="color:red;"><%= flash[:notice] %></p>
+        <p style="color:red; text-align: center"><%= flash[:notice] %></p>
       </div>
     <% end %>
     <%= form_tag '/login' do %>
@@ -38,11 +38,7 @@
 
     <br>
       <%= link_to "Don't have an account? Sign Up.", new_user_path, :class => "question-link" %>
-    <br> <br>
-
-    <footer>
-      <p id="footer-text">Get in contact with the Brotherhood! <a id="footer-link" href="mailto:pbe.tamu@gmail.com">pbe.tamu@gmail.com</a></p>
-    </footer>
+    <br>
 
    </body>
 

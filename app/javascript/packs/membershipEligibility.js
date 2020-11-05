@@ -9,9 +9,9 @@ function membershipEligibility(){
 	var testEventsTotal = 15; 
 	var i = testEventsAttended / testEventsTotal;
 	if(i >= 0.5){
-		document.getElementById("membershipEligibility").innerHTML = "You are eligible"; 
+		document.getElementById("membershipEligibility").innerHTML = "Yes"; 
 	}
 	else{
-		document.getElementById("membershipEligibility").innerHTML = "You are not eligible";
+		document.getElementById("membershipEligibility").innerHTML = "No";
 	}
 }
