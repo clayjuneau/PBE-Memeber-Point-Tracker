@@ -1,7 +1,7 @@
 //The purpose of this function is to calculate and display the member's standing
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    standingCheck();
+    //standingCheck();
 })
 
 function standingCheck(){
