@@ -1,131 +1,111 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <% content_for :title, "PBE Member List" %>
-      <nav class="navbar navbar-light bg-light">
-        <div class = "navbar-header">
-          <%= link_to home_path do %>
-            <%= fa_icon "home", size: '3x', id: "home-icon" %>
+<head>
+    <nav class="navbar navbar-light bg-light navbar-fixed-top">
+      <div class = "navbar-header">
+        <%= link_to home_path do %>
+          <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <% end %>
+      </div>
+
+      <h1>Professional Brotherhood of Engineers</h1>
+
+      <div class = "navbar-nav navbar-right">
+        <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
+      </div>
+    </nav>
+</head>
+<% @users.each do |user| %>
+  <tr>
+    <td><%user.points = user.id+2 %></td>
+    <% if user.role !="admin"%>
+      <td><%user.role = "member" %></td>
+    <% end %>
+  </tr>
+<% end %>
+<h2>User List</h2>
+<%if @filter =="namefilter"%>
+  <%= form_with(:method => "post") do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
+  <% end %>
+  <%= form_with do |form|%>
+    <%= form.label(:q, "Search For Users With the Name") %>
+    <%= form.text_field(:n, value:@searchName) %>
+    <%= form.submit("Search", :onclick=> "update") %>
+  <% end %>
+  <table summary="User detail view">
+      <tr class="header">
+        <th>Name</th>
+        <th>Points</th>
+        <th>Role</th>
+      </tr>
+      <% @users.each do |user| %>
+        <%if @searchList.length()==0%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%else%>
+          <%for word in @searchList%>
+            <%if (word ==user.firstName||word==user.lastName)%>
+              <tr>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+                <td><%= user.points %></td>
+                <td><%= user.role %></td>
+                <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+              </tr>
+            <%elsif (word ==user.firstName||word==user.lastName)%>
+              <tr>
+                <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+                <td><%= user.points %></td>
+                <td><%= user.role %></td>
+                <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+              </tr>
+            <% end %>
           <% end %>
-        </div>
-
-        <h1>Professional Brotherhood of Engineers</h1>
-
-        <div class = "navbar-nav navbar-right">
-          <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-lg" %>
-        </div>
-      </nav>
-  </head>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%user.points = user.id+2 %></td>
-      <% if user.role !="admin"%>
-        <td><%user.role = "member" %></td>
+        <% end %>
       <% end %>
-    </tr>
+  </table>
+<%elsif @filter =="rolefilter"%>
+  <%= form_with(:method => "post") do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.radio_button(:filtertype, "rolefilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
   <% end %>
-  <h2>User List</h2>
-  <%if @filter =="namefilter"%>
-    <%= form_with(:method => "post") do |filter|%>
-      <%= filter.label(:f, "Filter users by: ") %>
-      <%= filter.radio_button(:filtertype, "pointfilter") %>
-      <%= filter.label(:pointfilterlabel, "number of points") %>
-      <%= filter.radio_button(:filtertype, "namefilter", :checked =>true) %>
-      <%= filter.label(:namefilterlabel, "name") %>
-      <%= filter.radio_button(:filtertype, "rolefilter") %>
-      <%= filter.label(:rolefilterlabel, "role") %>
-      <%= filter.radio_button(:filtertype, "nofilter") %>
-      <%= filter.label(:nofilterlabel, "nothing") %>
-      <%= filter.submit("Filter", :onclick=> "updateFilter") %>
-    <% end %>
-  <%elsif @filter =="rolefilter"%>
-    <%= form_with(:method => "post") do |filter|%>
-      <%= filter.label(:f, "Filter users by: ") %>
-      <%= filter.radio_button(:filtertype, "pointfilter") %>
-      <%= filter.label(:pointfilterlabel, "number of points") %>
-      <%= filter.radio_button(:filtertype, "namefilter") %>
-      <%= filter.label(:namefilterlabel, "name") %>
-      <%= filter.radio_button(:filtertype, "rolefilter", :checked =>true) %>
-      <%= filter.label(:rolefilterlabel, "role") %>
-      <%= filter.radio_button(:filtertype, "nofilter") %>
-      <%= filter.label(:nofilterlabel, "nothing") %>
-      <%= filter.submit("Filter", :onclick=> "updateFilter") %>
-    <% end %>
-  <%elsif @filter =="pointfilter"%>
-    <%= form_with(:method => "post") do |filter|%>
-      <%= filter.label(:f, "Filter users by: ") %>
-      <%= filter.radio_button(:filtertype, "pointfilter", :checked =>true) %>
-      <%= filter.label(:pointfilterlabel, "number of points") %>
-      <%= filter.radio_button(:filtertype, "namefilter") %>
-      <%= filter.label(:namefilterlabel, "name") %>
-      <%= filter.radio_button(:filtertype, "rolefilter") %>
-      <%= filter.label(:rolefilterlabel, "role") %>
-      <%= filter.radio_button(:filtertype, "nofilter") %>
-      <%= filter.label(:nofilterlabel, "nothing") %>
-      <%= filter.submit("Filter", :onclick=> "updateFilter") %>
-    <% end %>
-  <%else%>
-    <%= form_with(:method => "post") do |filter|%>
-      <%= filter.label(:f, "Filter users by: ") %>
-      <%= filter.radio_button(:filtertype, "pointfilter") %>
-      <%= filter.label(:pointfilterlabel, "number of points") %>
-      <%= filter.radio_button(:filtertype, "namefilter") %>
-      <%= filter.label(:namefilterlabel, "name") %>
-      <%= filter.radio_button(:filtertype, "rolefilter") %>
-      <%= filter.label(:rolefilterlabel, "role") %>
-      <%= filter.radio_button(:filtertype, "nofilter", :checked =>true) %>
-      <%= filter.label(:nofilterlabel, "nothing") %>
-      <%= filter.submit("Filter", :onclick=> "updateFilter") %>
-    <% end %>
-  <% end %>
-  <%if @filter == "namefilter"%>
+  <%if @role =="admin"%>
     <%= form_with do |form|%>
-      <%= form.label(:q, "Search For Users With the Name") %>
-      <%= form.text_field(:n, value:@searchName) %>
+      <%= form.label(:q, "Search For Users With The Role") %>
+      <%= form.radio_button(:userrole, "member") %>
+      <%= form.label(:userrole_member, "Member") %>
+      <%= form.radio_button(:userrole, "admin", :checked =>true) %>
+      <%= form.label(:userrole_admin, "Admin") %>
       <%= form.submit("Search", :onclick=> "update") %>
     <% end %>
-  <%elsif @filter == "rolefilter"%>
-    <%if @role =="admin"%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With The Role") %>
-        <%= form.radio_button(:userrole, "member") %>
-        <%= form.label(:userrole_member, "Member") %>
-        <%= form.radio_button(:userrole, "admin", :checked =>true) %>
-        <%= form.label(:userrole_admin, "Admin") %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%else%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With The Role") %>
-        <%= form.radio_button(:userrole, "member", :checked =>true) %>
-        <%= form.label(:userrole_member, "Member") %>
-        <%= form.radio_button(:userrole, "admin") %>
-        <%= form.label(:userrole_admin, "Admin") %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%end%>
-  <%elsif @filter == "pointfilter"%>
-    <%if @threshold =="below"%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With Points") %>
-        <%= form.radio_button(:threshold, "above") %>
-        <%= form.label(:threshold_above, "Above") %>
-        <%= form.radio_button(:threshold, "below", :checked =>true) %>
-        <%= form.label(:threshold_below, "Below") %>
-        <%= form.number_field(:q, value:@value) %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%else%>
-      <%= form_with do |form|%>
-        <%= form.label(:q, "Search For Users With Points") %>
-        <%= form.radio_button(:threshold, "above", :checked =>true) %>
-        <%= form.label(:threshold_above, "Above") %>
-        <%= form.radio_button(:threshold, "below") %>
-        <%= form.label(:threshold_below, "Below") %>
-        <%= form.number_field(:q, value:@value) %>
-        <%= form.submit("Search", :onclick=> "update") %>
-      <% end %>
-    <%end%>
+  <%else%>
+    <%= form_with do |form|%>
+      <%= form.label(:q, "Search For Users With The Role") %>
+      <%= form.radio_button(:userrole, "member", :checked =>true) %>
+      <%= form.label(:userrole_member, "Member") %>
+      <%= form.radio_button(:userrole, "admin") %>
+      <%= form.label(:userrole_admin, "Admin") %>
+      <%= form.submit("Search", :onclick=> "update") %>
+    <% end %>
   <%end%>
   <table summary="User detail view">
       <tr class="header">
@@ -134,73 +114,86 @@
         <th>Role</th>
       </tr>
       <% @users.each do |user| %>
-        <%if @filter=="namefilter"%>
-          <%if @searchList.length()==0%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%else%>
-            <%for word in @searchList%>
-              <%if (word ==user.firstName||word==user.lastName)%>
-                <tr>
-                  <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-                  <td><%= user.points %></td>
-                  <td><%= user.role %></td>
-                </tr>
-              <%elsif (word ==user.firstName||word==user.lastName)%>
-                <tr>
-                  <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-                  <td><%= user.points %></td>
-                  <td><%= user.role %></td>
-                </tr>
-              <% end %>
-            <% end %>
-          <% end %>
-        <%elsif @filter=="rolefilter"%>
-          <%if @role=="admin"&& user.role =="admin"%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%elsif @role=="member"&& user.role !="admin"%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%elsif @role!="member"&& @role!="admin"%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%end%>
-        <%elsif @filter=="pointfilter"%>
-          <%if @threshold =="above" && user.points>@value%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-            </tr>
-          <%elsif @threshold=="below" && user.points<@value%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-              <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
-            </tr>
-          <%elsif @threshold.nil?||@value.nil?%>
-            <tr>
-              <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
-              <td><%= user.points %></td>
-              <td><%= user.role %></td>
-              <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
-            </tr>
-          <% end %>
-        <%else%>
+        <%if @role=="admin"&& user.role =="admin"%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%elsif @role=="member"&& user.role !="admin"%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%elsif @role!="member"&& @role!="admin"%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%end%>
+      <% end %>
+  </table>
+<%elsif @filter =="pointfilter"%>
+  <%= form_with(:method => "post") do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
+  <% end %>
+  <%if @threshold =="below"%>
+    <%= form_with do |form|%>
+      <%= form.label(:q, "Search For Users With Points") %>
+      <%= form.radio_button(:threshold, "above") %>
+      <%= form.label(:threshold_above, "Above") %>
+      <%= form.radio_button(:threshold, "below", :checked =>true) %>
+      <%= form.label(:threshold_below, "Below") %>
+      <%= form.number_field(:q, value:@value) %>
+      <%= form.submit("Search", :onclick=> "update") %>
+    <% end %>
+  <%else%>
+    <%= form_with do |form|%>
+      <%= form.label(:q, "Search For Users With Points") %>
+      <%= form.radio_button(:threshold, "above", :checked =>true) %>
+      <%= form.label(:threshold_above, "Above") %>
+      <%= form.radio_button(:threshold, "below") %>
+      <%= form.label(:threshold_below, "Below") %>
+      <%= form.number_field(:q, value:@value) %>
+      <%= form.submit("Search", :onclick=> "update") %>
+    <% end %>
+  <%end%>
+  <table summary="User detail view">
+      <tr class="header">
+        <th>Name</th>
+        <th>Points</th>
+        <th>Role</th>
+      </tr>
+      <% @users.each do |user| %>
+        <%if @threshold =="above" && user.points>@value%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%elsif @threshold=="below" && user.points<@value%>
+          <tr>
+            <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+            <td><%= user.points %></td>
+            <td><%= user.role %></td>
+            <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+          </tr>
+        <%elsif @threshold.nil?||@value.nil?%>
           <tr>
             <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
             <td><%= user.points %></td>
@@ -210,4 +203,32 @@
         <% end %>
       <% end %>
   </table>
-</html>
+<%else%>
+  <%= form_with(:method => "post") do |filter|%>
+    <%= filter.label(:f, "Filter users by: ") %>
+    <%= filter.radio_button(:filtertype, "pointfilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:pointfilterlabel, "number of points") %>
+    <%= filter.radio_button(:filtertype, "namefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:namefilterlabel, "name") %>
+    <%= filter.radio_button(:filtertype, "rolefilter", :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:rolefilterlabel, "role") %>
+    <%= filter.radio_button(:filtertype, "nofilter", :checked =>true, :onclick => "document.getElementById('filterButton').click()") %>
+    <%= filter.label(:nofilterlabel, "nothing") %>
+    <%= filter.submit("Filter", :id => 'filterButton', :style => "display: none;", :onclick=> "updateFilter") %>
+  <% end %>
+  <table summary="User detail view">
+      <tr class="header">
+        <th>Name</th>
+        <th>Points</th>
+        <th>Role</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%=link_to(user.firstName + " "+ user.lastName, home_path(:id => user.id), :class => 'action show') %></td>
+          <td><%= user.points %></td>
+          <td><%= user.role %></td>
+          <td><%= link_to "Edit", edit_user_path(user), :class => 'action edit' %></td>
+        </tr>
+      <% end %>
+  </table>
+<% end %>

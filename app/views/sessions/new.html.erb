@@ -3,8 +3,13 @@
   <head>
     <% content_for :title, "PBE Point Tracker Login" %>
     <nav class="navbar navbar-light bg-light">
+      <ul class = "navbar-nav navbar">
+        <%= link_to "About", "/about", :class => "btn btn-light" %>
+      </ul>
+      <h3>Professional Brotherhood of Engineers</h3>
+      
       <ul class = "navbar-nav navbar-right">
-        <%= button_to "Sign Up", new_user_path, method: "get", :class => "btn btn-lg" %>
+        <%= button_to "Sign Up", new_user_path, method: "get", :class => "btn btn-primary" %>
       </ul>
     </nav>
   </head>
@@ -12,20 +17,32 @@
   <body>
     <%= image_tag 'logo.jpg' %>
     <h2 class = "bottom-space">Point Tracker Login</h2>
-
+    <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <p style="color:red;"><%= flash[:notice] %></p>
+      </div>
+    <% end %>
     <%= form_tag '/login' do %>
       <table class="login-form-spacing">
         <tr>
           <th>Email:</th>
-          <td><%= text_field_tag :email, nil, placeholder: 'Email'%> </td>
+          <td><%= text_field_tag :email, nil, placeholder: 'sample@tamu.edu', :class => "text-field"%> </td>
         </tr>
         <tr>
           <th>Password:</th>
-          <td><%= password_field_tag :password, nil, placeholder: 'Password' %></td>
+          <td><%= password_field_tag :password, nil, placeholder: 'Password', :class => "text-field" %></td>
         </tr>
       </table>
-      <%= submit_tag "Login" %>
+      <%= submit_tag "Login", :class => "btn btn-primary"%>
     <%end%>
+
+    <br>
+      <%= link_to "Don't have an account? Sign Up.", new_user_path, :class => "question-link" %>
+    <br> <br>
+
+    <footer>
+      <p id="footer-text">Get in contact with the Brotherhood! <a id="footer-link" href="mailto:pbe.tamu@gmail.com">pbe.tamu@gmail.com</a></p>
+    </footer>
 
    </body>
 

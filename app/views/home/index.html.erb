@@ -8,7 +8,6 @@
           <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
       </div>
-
       <h1>Professional Brotherhood of Engineers</h1>
 
       <div class = "navbar-nav navbar-right">
@@ -24,7 +23,7 @@
     <%else%>
       <%="member"%>
     <%end%></h2>
-    <p id="standing"></p>
+    <p class="standing" id="standing"></p>
 
     <table summary="User detail view">
         <tr>
@@ -50,7 +49,7 @@
     </table>
   <%else%>
     <h2><%= @user.firstName %> <%= @user.lastName %>, <%= @user.role %></h2>
-    <p id="standing"></p>
+    <p class="standing" id="standing"></p>
 
     <table summary="User detail view">
         <tr>
