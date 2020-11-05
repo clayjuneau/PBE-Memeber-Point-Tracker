@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PBE: Member Point Tracker</title>
+    <title><%= yield(:title) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,7 +14,4 @@
     <%= yield %>
   </body>
 
-  <footer>
-    <p id="footer-text">Get in contact with the Brotherhood! <a href="mailto:tylerg3@tamu.edu">tylerg3@tamu.edu</a></p>
-  </footer>
 </html>

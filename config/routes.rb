@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
     # Defines the start page of the application
     root 'home#index'
+
+    get "/:page", to: "static#show"
 end
