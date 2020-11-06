@@ -19,14 +19,30 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end
 
+    def change_password
+        @user = User.find(params[:id])
+    end
+
     def update
         @user = User.find(params[:id])
         if @user.update_attributes(user_params)
-            redirect_to memberlist_path    
+            if is_admin?
+                redirect_to memberlist_path, :notice => 'Success!'
+            else
+                redirect_to home_path, :notice => 'Success!'
+            end
         else
             render edit_user_path
         end
+    end
 
+    def update_password
+        @user = User.find(params[:user][:user_id])
+        if @user.update(:password => params[:user][:password])
+            redirect_to edit_user_path(@user), :notice => 'Success!'
+        else
+            redirect_to change_password_path(:id => params[:user][:user_id]), :notice => 'Failed to update password.'
+        end
     end
 
     def user_params

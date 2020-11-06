@@ -41,8 +41,16 @@
     </table>
 
     <div id="links">
+        <% if current_user.id == @user.id %>
+        <div style="display: inline-block;">
+            <%= button_to "Edit Profile", edit_user_path(@user), :method => "get", :class => "btn btn-primary" %>
+        </div>
+        <% end %>
+
         <% if is_admin?%>
-        <%= button_to "View All Users", memberlist_path, :method => "get", :class => "btn btn-primary" %>
+        <div style="display: inline-block;">
+            <%= button_to "View All Users", memberlist_path, :method => "get", :style => "display: inline-block;", :class => "btn btn-primary" %>
+        </div>
         <% end %>
     </div>
 

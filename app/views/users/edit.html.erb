@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <nav class="navbar navbar-light bg-light">
+
+<head>
+    <nav class="navbar navbar-light bg-light">
         <%= link_to home_path do %>
-            <%= fa_icon "home", size: '3x', id: "home-icon" %>
+        <%= fa_icon "home", size: '3x', id: "home-icon" %>
         <% end %>
 
         <h1>Professional Brotherhood of Engineers</h1>
         <%= button_to "Logout", logout_path, method: "delete", :class => "btn btn-primary" %>
 
-        </nav>
-    </head>
+    </nav>
+</head>
 
-    <h2 class = "bottom-space">Editing</h2>
+<h2 class="bottom-space">Editing</h2>
 
-    <%= simple_form_for @user do |f|%>
-        <table class="login-form-spacing">
-            <tr>
-            <th>Email:</th>
-            <td><%= f.text_field :email, placeholder: 'Email', :class => "text-field"%></td>
-            </tr>
-            <tr>
-            <th>First Name:</th>
-            <td><%= f.text_field :firstName, placeholder: 'First Name', :class => "text-field"%></td>
-            </tr>
-            <tr>
-            <th>Last Name:</th>
-            <td><%= f.text_field :lastName, placeholder: 'Last Name', :class => "text-field"%></td>
-            </tr>
-            <tr>
-            <th>Role:</th>
-            <td><%= f.select :role, ['member', 'admin'] %></td>
-            </tr>
-        </table>
-    <%= submit_tag "Save Changes", :class => "btn btn-primary"%>
-  <%end%>
+<%= simple_form_for @user do |f|%>
+<table class="login-form-spacing">
+    <tr>
+        <th>Email:</th>
+        <td><%= f.text_field :email, placeholder: 'Email', :class => "text-field"%></td>
+    </tr>
+    <tr>
+        <th>First Name:</th>
+        <td><%= f.text_field :firstName, placeholder: 'First Name', :class => "text-field"%></td>
+    </tr>
+    <tr>
+        <th>Last Name:</th>
+        <td><%= f.text_field :lastName, placeholder: 'Last Name', :class => "text-field"%></td>
+    </tr>
+    <tr>
+        <th>Role:</th>
+        <td><%= f.select :role, ['member', 'admin'], {}, { :disabled => !is_admin? || @user.id == current_user.id } %></td>
+    </tr>
+</table>
+<%= submit_tag "Save Changes", :class => "btn btn-primary" %>
+<%end%>
+
+<div style='margin-top: 20px;'>
+    <%= link_to 'Change User Password', change_password_path(:id => @user.id) %>
+</div>
 
 </html>

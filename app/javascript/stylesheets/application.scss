@@ -65,6 +65,38 @@ th, td {
     padding-right: 100px;
 }
 
+.alert {
+    height: 35px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-top: 4px;
+    font-weight: 600;
+    color: white;
+    background:rgb(188,86,86);
+    border: 2px solid rgb(188,86,86);
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-radius: 7px;
+}
+
+.notice {
+    height: 35px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-top: 5px;
+    font-weight: 600;
+    color: white;
+    background:rgb(86,188,127);
+    border: 2px solidrgb(86,188,127);
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-radius: 7px;
+}
+
 #home-icon {
     color: #000000;
 }
