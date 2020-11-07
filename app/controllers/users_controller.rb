@@ -10,9 +10,17 @@ class UsersController < ApplicationController
 
     # Called when user attempts signup
     def create
-        @user = User.create(params.require(:user).permit(:email, :firstName, :lastName, :role, :password))
+      if not User.find_by(email: user_params[:email]).nil?
+        flash[:alert] = "#{user_params[:email]} already has an account"
+        redirect_to new_user_path
+      elsif params[:email] == ""||params[:email].nil?||params[:firstName] == ""||params[:firstName].nil?||params[:lastName] == ""||params[:lastName].nil?||params[:password] == ""||params[:password].nil?
+        flash[:alert] = "Please fill out all fields"
+        redirect_to new_user_path
+      else
+        @user = User.create(user_params)
         session[:user_id] = @user.id
         redirect_to home_path
+      end
     end
 
     def edit
