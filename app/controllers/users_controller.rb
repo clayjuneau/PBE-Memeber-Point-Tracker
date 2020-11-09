@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       if not User.find_by(email: user_params[:email]).nil?
         flash[:alert] = "#{user_params[:email]} already has an account"
         redirect_to new_user_path
-      elsif params[:email] == ""||params[:email].nil?||params[:firstName] == ""||params[:firstName].nil?||params[:lastName] == ""||params[:lastName].nil?||params[:password] == ""||params[:password].nil?
+      elsif params[:user][:email] == ""||params[:user][:email].nil?||params[:user][:firstName] == ""||params[:user][:firstName].nil?||params[:user][:lastName] == ""||params[:user][:lastName].nil?||params[:user][:password] == ""||params[:user][:password].nil?
         flash[:alert] = "Please fill out all fields"
         redirect_to new_user_path
       else
