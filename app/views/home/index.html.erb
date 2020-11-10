@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <th class="indextable">Percent Attendance</th>
-            <td class="indextable"><%=((user_events(@user.id).count.to_f / mandatory_events.count.to_f) * 100).round%>%</td>
+            <td class="indextable"><%=(point_percentage(@user.id) * 100).round%>%</td>
         </tr>
         <tr>
             <th class="indextable">Membership Eligibility</th>
