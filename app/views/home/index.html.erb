@@ -18,7 +18,7 @@
 <body>
     <h2><%= @user.firstName %> <%= @user.lastName %> | <%= @user.role.capitalize %></h2>
     <% if current_user.id == @user.id %>
-    <p class="standing" style="color:rgb(<%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "86,188,127" : "188,86,86"%>)"><%= (user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "You are currently in good standing!" : "You are currently in poor standing." %></p>
+    <p class="standing" style="color:rgb(<%=point_percentage(@user.id) >= 0.5 ? "86,188,127" : "188,86,86"%>)"><%= point_percentage(@user.id) >= 0.5 ? "You are currently in good standing!" : "You are currently in poor standing." %></p>
     <% end %>
 
     <table summary="User detail view">
@@ -32,11 +32,11 @@
         </tr>
         <tr>
             <th class="indextable">Membership Eligibility</th>
-            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.5 ? "Eligible" : "Not eligible"%></td>
+            <td class="indextable"><%=point_percentage(@user.id) >= 0.5 ? "Eligible" : "Not eligible"%></td>
         </tr>
         <tr>
             <th class="indextable">Officer Eligibility</th>
-            <td class="indextable"><%=(user_events(@user.id).count.to_f / mandatory_events.count.to_f) >= 0.8 ? "Eligible" : "Not eligible"%></td>
+            <td class="indextable"><%=point_percentage(@user.id) >= 0.8 ? "Eligible" : "Not eligible"%></td>
         </tr>
     </table>
 
