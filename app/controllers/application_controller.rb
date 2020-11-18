@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
 
     def user_events(user_id = current_user.id)
         user = User.find_by(id: user_id)
-        return Event.includes(:customers).where(customers: { email: user.email })
+        matching_user = Customer.where('lower(customers.email) = ?', user.email.downcase).first
+        return Event.includes(:customers).where(customers: { id: matching_user.id })
     end
 
     def mandatory_events
