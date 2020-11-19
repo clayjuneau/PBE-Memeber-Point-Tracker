@@ -20,9 +20,21 @@ class ApplicationController < ActionController::Base
         User.find_by(id: session[:user_id])  
     end
 
-    def user_events(user_id = current_user.id)
+    def user_events(user_id = current_user.id, mandatory = false)
         user = User.find_by(id: user_id)
-        return Event.includes(:customers).where(customers: { email: user.email })
+        matching_user = Customer.where('lower(customers.email) = ?', user.email.downcase).first
+
+        if matching_user == nil
+            return []
+        end
+
+        events = Event.includes(:customers).where(customers: { id: matching_user.id })
+
+        if mandatory
+            events = events.where(:mandatory => true)
+        end
+
+        return events
     end
 
     def mandatory_events
