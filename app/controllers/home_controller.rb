@@ -14,7 +14,7 @@ class HomeController < ApplicationController
     end
 
     def point_percentage(user_id)
-        user_event_count = user_events(user_id).count.to_f
+        user_event_count = user_events(user_id, true).count.to_f
         mandatory_event_count = mandatory_events.count.to_f
 
         if user_event_count == 0 || mandatory_event_count == 0
